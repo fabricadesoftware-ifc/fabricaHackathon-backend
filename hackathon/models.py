@@ -82,6 +82,7 @@ class equipe(models.Model):
     linkPitch = models.URLField(null=True, blank=True)
     dataInscricao = models.DateField(auto_now_add=True, null=True, blank=True)
     inscricaoValidada = models.BooleanField(default=False, null=True, blank=True)
+    fotoEquipe = models.ImageField(upload_to='equipes', null=True, blank=True)
 
     def __str__(self):
         return self.nome
@@ -167,3 +168,17 @@ class apoiadores(models.Model):
         verbose_name = 'Apoiador'
         verbose_name_plural = 'Apoiadores'
         ordering = ['empresa']
+
+class ranking(models.Model):
+    equipe = models.ForeignKey(equipe, on_delete=models.RESTRICT)
+    notaFinal = models.DecimalField(max_digits=3, decimal_places=1)
+    classificacao = models.IntegerField()
+    edicao = models.ForeignKey(edicao, on_delete=models.RESTRICT)
+
+    def __str__(self):
+        return f'{self.equipe.nome} - {self.notaFinal} - {self.classificacao}'
+    
+    class Meta:
+        verbose_name = 'Ranking'
+        verbose_name_plural = 'Rankings'
+        ordering = ['edicao__ano', 'edicao__semestre', 'equipe__nome', 'classificacao']

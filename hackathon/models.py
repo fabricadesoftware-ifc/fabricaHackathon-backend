@@ -41,6 +41,8 @@ class edicao(models.Model):
     cursos = models.ManyToManyField(curso)
     turmasEnvolvidas = models.ManyToManyField(turma)
     fotoEdicao = models.ImageField(upload_to='edicoes', null=True, blank=True)
+    aceitaInscricoes = models.BooleanField(default=True, null=True, blank=True)
+    prazoInscricoes = models.DateField(null=True, blank=True)
 
     def __str__(self):
         return f'{self.ano}.{self.semestre}'
@@ -78,6 +80,7 @@ class equipe(models.Model):
     linkApresentacao = models.URLField(null=True, blank=True)
     linkVideo = models.URLField(null=True, blank=True)
     linkPitch = models.URLField(null=True, blank=True)
+    dataInscricao = models.DateField(auto_now_add=True, null=True, blank=True)
 
     def __str__(self):
         return self.nome
@@ -149,3 +152,17 @@ class avaliacao(models.Model):
 
     def __str__(self):
         return f'{self.avaliador.nome} - {self.equipe.nome} - {self.criterio.descricao} - {self.nota}'
+
+class apoiadores(models.Model):
+    empresa = models.CharField(max_length=100)
+    logo = models.ImageField(upload_to='apoiadores', null=True, blank=True)
+    link = models.URLField()
+    edicao = models.ForeignKey(edicao, on_delete=models.RESTRICT, null=True, blank=True)
+
+    def __str__(self):
+        return f'{self.empresa}'
+    
+    class Meta:
+        verbose_name = 'Apoiador'
+        verbose_name_plural = 'Apoiadores'
+        ordering = ['empresa']

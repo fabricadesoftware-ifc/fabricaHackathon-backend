@@ -81,6 +81,7 @@ class equipe(models.Model):
     linkVideo = models.URLField(null=True, blank=True)
     linkPitch = models.URLField(null=True, blank=True)
     dataInscricao = models.DateField(auto_now_add=True, null=True, blank=True)
+    inscricaoValidada = models.BooleanField(default=False, null=True, blank=True)
 
     def __str__(self):
         return self.nome

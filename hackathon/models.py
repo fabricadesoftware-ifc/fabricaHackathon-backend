@@ -40,6 +40,7 @@ class edicao(models.Model):
     semestre = models.IntegerField()
     cursos = models.ManyToManyField(curso)
     turmasEnvolvidas = models.ManyToManyField(turma)
+    fotoEdicao = models.ImageField(upload_to='edicoes', null=True, blank=True)
 
     def __str__(self):
         return f'{self.ano}.{self.semestre}'

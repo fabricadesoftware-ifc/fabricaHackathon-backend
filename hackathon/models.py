@@ -155,6 +155,10 @@ class avaliacao(models.Model):
     def __str__(self):
         return f'{self.avaliador.nome} - {self.equipe.nome} - {self.criterio.descricao} - {self.nota}'
 
+    class Meta:
+        verbose_name = 'Avaliação'
+        verbose_name_plural = 'Avaliações'
+
 class apoiadores(models.Model):
     empresa = models.CharField(max_length=100)
     logo = models.ImageField(upload_to='apoiadores', null=True, blank=True)

@@ -1,0 +1,10 @@
+from .aluno import AlunoListSerializer, AlunoDetailSerializer
+from .apoiador import ApoiadorListSerializer, ApoiadorRetrieveSerializer, ApoiadorCreateSerializer
+from .avaliacao import AvaliacaoListSerializer, AvaliacaoDetailSerializer
+from .avaliador import AvaliadorListSerializer, AvaliadorDetailSerializer
+from .criterio import CriterioListSerializer, CriterioDetailSerializer
+from .curso import CursoListSerializer, CursoDetailSerializer
+from .edicao import EdicaoListSerializer, EdicaoRetrieveSerializer, EdicaoCreateSerializer, AvaliadorEdicaoDetailSerializer, AvaliadorEdicaoSerializer, EdicaoCriterioDetailSerializer, EdicaoCriterioSerializer
+from .equipe import EquipeCreateSerializer, EquipeListSerializer, EquipeRetrieveSerializer
+from .ranking import RankingDetailSerializer, RankingSerializer
+from .turma import TurmaDetailSerializer, TurmaSerializer

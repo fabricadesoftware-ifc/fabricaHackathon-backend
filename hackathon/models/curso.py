@@ -4,7 +4,7 @@ class Curso(models.Model):
     nome = models.CharField(max_length=100)
     carga_horaria = models.IntegerField()
     sigla = models.CharField(max_length=10)
-    nivelCurso = models.CharField(
+    nivel_curso = models.CharField(
         max_length=10,
         choices=[
             ('tecn', 'Técnico'),

@@ -7,14 +7,14 @@ class Equipe(models.Model):
     nome = models.CharField(max_length=100)
     alunos = models.ManyToManyField(Aluno)
     edicao = models.ForeignKey(Edicao, on_delete=models.RESTRICT)
-    linkDeploy = models.URLField(null=True, blank=True)
-    linkRepositorio = models.URLField(null=True, blank=True)
-    linkApresentacao = models.URLField(null=True, blank=True)
-    linkVideo = models.URLField(null=True, blank=True)
-    linkPitch = models.URLField(null=True, blank=True)
-    dataInscricao = models.DateField(auto_now_add=True, null=True, blank=True)
-    inscricaoValidada = models.BooleanField(default=False, null=True, blank=True)
-    fotoEquipe = models.ImageField(upload_to='equipes', null=True, blank=True)
+    link_deploy = models.URLField(null=True, blank=True)
+    link_repositorio = models.URLField(null=True, blank=True)
+    link_apresentacao = models.URLField(null=True, blank=True)
+    link_video = models.URLField(null=True, blank=True)
+    link_pitch = models.URLField(null=True, blank=True)
+    data_inscricao = models.DateField(auto_now_add=True, null=True, blank=True)
+    inscricao_validada = models.BooleanField(default=False, null=True, blank=True)
+    foto_equipe = models.ImageField(upload_to='equipes', null=True, blank=True)
 
     def __str__(self):
         return self.nome

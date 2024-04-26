@@ -6,8 +6,15 @@ class AlunoListSerializer(ModelSerializer):
     class Meta:
         model = Aluno
         fields = ('id', 'nome', 'turma')
+        depth = 1
 
-class AlunoDetailSerializer(ModelSerializer):
+class AlunoRetrieveSerializer(ModelSerializer):
+    class Meta:
+        model = Aluno
+        fields = '__all__'
+        depth = 1
+
+class AlunoCreateSerializer(ModelSerializer):
     class Meta:
         model = Aluno
         fields = '__all__'

@@ -7,7 +7,7 @@ class AvaliadorListSerializer(ModelSerializer):
         model = Avaliador
         fields = ('id', 'nome', 'github')
 
-class AvaliadorDetailSerializer(ModelSerializer):
+class AvaliadorSerializer(ModelSerializer):
     class Meta:
         model = Avaliador
         fields = '__all__'

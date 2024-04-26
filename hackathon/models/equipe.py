@@ -5,7 +5,7 @@ from .edicao import Edicao
 
 class Equipe(models.Model):
     nome = models.CharField(max_length=100)
-    alunos = models.ManyToManyField(Aluno)
+    alunos = models.ManyToManyField(Aluno, related_name='alunos')
     edicao = models.ForeignKey(Edicao, on_delete=models.RESTRICT)
     link_deploy = models.URLField(null=True, blank=True)
     link_repositorio = models.URLField(null=True, blank=True)
@@ -15,6 +15,7 @@ class Equipe(models.Model):
     data_inscricao = models.DateField(auto_now_add=True, null=True, blank=True)
     inscricao_validada = models.BooleanField(default=False, null=True, blank=True)
     foto_equipe = models.ImageField(upload_to='equipes', null=True, blank=True)
+    lider = models.ForeignKey(Aluno, on_delete=models.RESTRICT, related_name='lider', null=True, blank=True)
 
     def __str__(self):
         return self.nome

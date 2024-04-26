@@ -7,7 +7,7 @@ class CriterioListSerializer(ModelSerializer):
         model = Criterio
         fields = ('id', 'descricao', 'peso')
 
-class CriterioDetailSerializer(ModelSerializer):
+class CriterioSerializer(ModelSerializer):
     class Meta:
         model = Criterio
         fields = '__all__'

@@ -13,6 +13,9 @@ class Edicao(models.Model):
     foto_edicao = models.ImageField(upload_to='edicoes', null=True, blank=True)
     aceita_inscricoes = models.BooleanField(default=True, null=True, blank=True)
     prazo_inscricoes = models.DateField(null=True, blank=True)
+    data_inicio = models.DateField(null=True, blank=True)
+    data_fim = models.DateField(null=True, blank=True)
+    quantidade_membros_equipe = models.IntegerField(null=True, blank=True)
 
     def __str__(self):
         return f'{self.ano}.{self.semestre}'

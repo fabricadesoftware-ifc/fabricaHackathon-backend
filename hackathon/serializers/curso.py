@@ -7,7 +7,7 @@ class CursoListSerializer(ModelSerializer):
         model = Curso
         fields = ('id', 'nome', 'nivel_curso')
 
-class CursoDetailSerializer(ModelSerializer):
+class CursoSerializer(ModelSerializer):
     class Meta:
         model = Curso
         fields = '__all__'

@@ -6,6 +6,7 @@ class ApoiadorListSerializer(ModelSerializer):
     class Meta:
         model = Apoiador
         fields = ('id', 'empresa', 'logo', 'link', 'edicao')
+        depth = 1
 
 class ApoiadorRetrieveSerializer(ModelSerializer):
     class Meta:

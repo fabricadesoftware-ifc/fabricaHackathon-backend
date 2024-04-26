@@ -3,7 +3,7 @@ from rest_framework.viewsets import ModelViewSet
 from hackathon.models import Ranking
 from hackathon.serializers import RankingDetailSerializer, RankingSerializer
 
-class RankinhViewSet(ModelViewSet):
+class RankingViewSet(ModelViewSet):
     queryset = Ranking.objects.all()
 
     def get_serializer_class(self):

@@ -18,8 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 
-from hackathon.views import AlunoViewSet, ApoiadorViewSet, AvaliacaoViewSet, AvaliadorViewSet, CriterioViewSet, TurmaViewSet, CursoViewSet, EdicaoViewSet, EquipeViewSet, AvaliadorEdicaoViewSet, EdicaoCriterioViewSet
-
+from hackathon.views import AlunoViewSet, ApoiadorViewSet, AvaliacaoViewSet, AvaliadorViewSet, CriterioViewSet, TurmaViewSet, CursoViewSet, EdicaoViewSet, EquipeViewSet
 router = DefaultRouter()
 
 router.register('turmas', TurmaViewSet)
@@ -31,8 +30,6 @@ router.register('avaliadores', AvaliadorViewSet)
 router.register('criterios', CriterioViewSet)
 router.register('edicoes', EdicaoViewSet)
 router.register('equipes', EquipeViewSet)
-router.register('avaliadores-edicoes', AvaliadorEdicaoViewSet)
-router.register('edicoes-criterios', EdicaoCriterioViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),

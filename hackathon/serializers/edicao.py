@@ -1,6 +1,6 @@
 from rest_framework.serializers import ModelSerializer
 
-from hackathon.models import Edicao, AvaliadorEdicao, EdicaoCriterio
+from hackathon.models import Edicao
 
 class EdicaoListSerializer(ModelSerializer):
     class Meta:
@@ -17,25 +17,3 @@ class EdicaoCreateSerializer(ModelSerializer):
     class Meta:
         model = Edicao
         fields = '__all__'
-
-class AvaliadorEdicaoSerializer(ModelSerializer):
-    class Meta:
-        model = AvaliadorEdicao
-        fields = '__all__'
-
-class AvaliadorEdicaoDetailSerializer(ModelSerializer):
-    class Meta:
-        model = AvaliadorEdicao
-        fields = '__all__'
-        depth = 1
-
-class EdicaoCriterioSerializer(ModelSerializer):
-    class Meta:
-        model = EdicaoCriterio
-        fields = '__all__'
-
-class EdicaoCriterioDetailSerializer(ModelSerializer):
-    class Meta:
-        model = EdicaoCriterio
-        fields = '__all__'
-        depth = 1

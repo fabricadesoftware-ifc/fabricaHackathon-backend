@@ -1,7 +1,5 @@
 from .criterio import Criterio
 from .edicao import Edicao
-from .edicao import AvaliadorEdicao
-from .edicao import EdicaoCriterio
 from .curso import Curso
 from .turma import Turma
 from .avaliador import Avaliador

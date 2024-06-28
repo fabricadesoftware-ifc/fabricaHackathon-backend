@@ -16,6 +16,8 @@ class Edicao(models.Model):
     data_inicio = models.DateField(null=True, blank=True)
     data_fim = models.DateField(null=True, blank=True)
     quantidade_membros_equipe = models.IntegerField(null=True, blank=True)
+    avaliador = models.ManyToManyField(Avaliador)
+    criterio = models.ManyToManyField(Criterio)
 
     def __str__(self):
         return f'{self.ano}.{self.semestre}'
@@ -24,28 +26,3 @@ class Edicao(models.Model):
         verbose_name = 'Edição'
         verbose_name_plural = 'Edições'
         ordering = ['ano', 'semestre']
-
-
-class AvaliadorEdicao(models.Model):
-    avaliador = models.ForeignKey(Avaliador, on_delete=models.RESTRICT)
-    edicao = models.ForeignKey(Edicao, on_delete=models.RESTRICT)
-
-    def __str__(self):
-        return f'{self.avaliador} - {self.edicao.ano}.{self.edicao.semestre}'
-    
-    class Meta:
-        verbose_name = 'Avaliador da Edição'
-        verbose_name_plural = 'Avaliadores das Edições'
-        ordering = ['avaliador', 'edicao__ano', 'edicao__semestre']
-
-class EdicaoCriterio(models.Model):
-    edicao = models.ForeignKey(Edicao, on_delete=models.RESTRICT)
-    criterio = models.ForeignKey(Criterio, on_delete=models.RESTRICT)
-
-    def __str__(self):
-        return f'{self.edicao.ano}.{self.edicao.semestre} - {self.criterio}'
-    
-    class Meta:
-        verbose_name = 'Critério da Edição'
-        verbose_name_plural = 'Critérios das Edições'
-        ordering = ['edicao__ano', 'edicao__semestre', 'criterio']

@@ -17,15 +17,24 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
+from drf_spectacular.views import (
+    SpectacularAPIView,
+    SpectacularRedocView,
+    SpectacularSwaggerView,
+)
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
 
-from hackathon.views import AlunoViewSet, ApoiadorViewSet, AvaliacaoViewSet, AvaliadorViewSet, CriterioViewSet, TurmaViewSet, CursoViewSet, EdicaoViewSet, EquipeViewSet
+from hackathon.views import AlunoViewSet, ApoiadorViewSet, AvaliacaoLivreViewSet, AvaliadorViewSet, CriterioViewSet, TurmaViewSet, CursoViewSet, EdicaoViewSet, EquipeViewSet
 router = DefaultRouter()
 
 router.register('turmas', TurmaViewSet)
 router.register('cursos', CursoViewSet)
 router.register('alunos', AlunoViewSet)
 router.register('apoiadores', ApoiadorViewSet)
-router.register('avaliacoes', AvaliacaoViewSet)
+router.register('avaliacoes', AvaliacaoLivreViewSet)
 router.register('avaliadores', AvaliadorViewSet)
 router.register('criterios', CriterioViewSet)
 router.register('edicoes', EdicaoViewSet)
@@ -33,5 +42,18 @@ router.register('equipes', EquipeViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include(router.urls)),
+    path('api/', include(router.urls)),
+    path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
+    path(
+        "api/swagger/",
+        SpectacularSwaggerView.as_view(url_name="schema"),
+        name="swagger-ui",
+    ),
+    path(
+        "api/redoc/",
+        SpectacularRedocView.as_view(url_name="schema"),
+        name="redoc",
+    ),
+    path("token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
+    path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
 ]

@@ -1,6 +1,6 @@
 from .aluno import AlunoViewSet
 from .apoiador import ApoiadorViewSet
-from .avaliacao import AvaliacaoViewSet
+from .avaliacao import AvaliacaoLivreViewSet
 from .avaliador import AvaliadorViewSet
 from .criterio import CriterioViewSet
 from .curso import CursoViewSet

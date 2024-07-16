@@ -3,13 +3,13 @@ from django.db import models
 from .avaliator import Avaliator
 from .course import Course
 from .criterion import Criterion
-from .classe import Classe
+from .classInfo import ClassInfo
 
 class Edition(models.Model):
     year = models.IntegerField()
     semester = models.IntegerField()
     courses = models.ManyToManyField(Course)
-    involved_classes = models.ManyToManyField(Classe)
+    involved_classes = models.ManyToManyField(ClassInfo)
     edition_photo = models.ImageField(upload_to='editions', null=True, blank=True)
     applications_accepted = models.BooleanField(default=True, null=True, blank=True)
     registration_deadline = models.DateField(null=True, blank=True)

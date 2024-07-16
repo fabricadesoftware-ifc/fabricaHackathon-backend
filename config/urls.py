@@ -27,18 +27,18 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
 
-from hackathon.views import AlunoViewSet, ApoiadorViewSet, AvaliacaoLivreViewSet, AvaliadorViewSet, CriterioViewSet, TurmaViewSet, CursoViewSet, EdicaoViewSet, EquipeViewSet
+from hackathon.views import StudentViewSet, SupporterViewSet, FreeAvaliationViewSet, AvaliatorViewSet, CriterionViewSet, ClassInfoViewSet, CourseViewSet, EditionViewSet, TeamViewSet
 router = DefaultRouter()
 
-router.register('turmas', TurmaViewSet)
-router.register('cursos', CursoViewSet)
-router.register('alunos', AlunoViewSet)
-router.register('apoiadores', ApoiadorViewSet)
-router.register('avaliacoes', AvaliacaoLivreViewSet)
-router.register('avaliadores', AvaliadorViewSet)
-router.register('criterios', CriterioViewSet)
-router.register('edicoes', EdicaoViewSet)
-router.register('equipes', EquipeViewSet)
+router.register('classes', ClassInfoViewSet)
+router.register('courses', CourseViewSet)
+router.register('students', StudentViewSet)
+router.register('supporters', SupporterViewSet)
+router.register('avaliations', FreeAvaliationViewSet)
+router.register('avaliators', AvaliatorViewSet)
+router.register('criteria', CriterionViewSet)
+router.register('editions', EditionViewSet)
+router.register('teams', TeamViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),

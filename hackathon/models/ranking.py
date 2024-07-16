@@ -15,4 +15,4 @@ class Ranking(models.Model):
     class Meta:
         verbose_name = 'Ranking'
         verbose_name_plural = 'Rankings'
-        ordering = ['year__edition', 'semester__year', 'name__team', 'classification']
+        ordering = ['classification']

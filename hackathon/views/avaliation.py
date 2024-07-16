@@ -2,14 +2,14 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework.decorators import permission_classes
 from ..permissions import IsAuthenticatedOrReadOnly
 
-from hackathon.models import Avaliacao
-from hackathon.serializers import AvaliacaoSerializer, AvaliacaoDetailSerializer
+from hackathon.models import Avaliation
+from hackathon.serializers import AvaliationSerializer, AvaliationDetailSerializer
 
 @permission_classes([IsAuthenticatedOrReadOnly])
-class AvaliacaoLivreViewSet(ModelViewSet):
-    queryset = Avaliacao.objects.all()
+class FreeAvaliationViewSet(ModelViewSet):
+    queryset = Avaliation.objects.all()
     
     def get_serializer_class(self):
         if self.action == 'retrieve':
-            return AvaliacaoDetailSerializer
-        return AvaliacaoSerializer
+            return AvaliationDetailSerializer
+        return AvaliationSerializer

@@ -1,7 +1,7 @@
 from rest_framework.viewsets import ModelViewSet
 
 from hackathon.models import Edition
-from hackathon.serializers import EditionCreateSerializer, EditionListSerializer, EditionRetrieveSerializer
+from hackathon.serializers import EditionWriteSerializer, EditionListSerializer, EditionRetrieveSerializer
 
 class EditionViewSet(ModelViewSet):
     queryset = Edition.objects.all()
@@ -11,4 +11,4 @@ class EditionViewSet(ModelViewSet):
             return EditionListSerializer
         if self.action == 'retrieve':
             return EditionRetrieveSerializer
-        return EditionCreateSerializer
+        return EditionWriteSerializer

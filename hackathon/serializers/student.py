@@ -5,7 +5,7 @@ from hackathon.models import Student
 class StudentListSerializer(ModelSerializer):
     class Meta:
         model = Student
-        fields = ('id', 'name', 'classe')
+        fields = ('id', 'name', 'classInfo')
         depth = 1
 
 class StudentRetrieveSerializer(ModelSerializer):

@@ -27,14 +27,14 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
 
-from hackathon.views import StudentViewSet, SupporterViewSet, FreeAvaliationViewSet, AvaliatorViewSet, CriterionViewSet, ClassInfoViewSet, CourseViewSet, EditionViewSet, TeamViewSet
+from hackathon.views import StudentViewSet, SupporterViewSet, AvaliationViewSet, AvaliatorViewSet, CriterionViewSet, ClassInfoViewSet, CourseViewSet, EditionViewSet, TeamViewSet
 router = DefaultRouter()
 
 router.register('classes', ClassInfoViewSet)
 router.register('courses', CourseViewSet)
 router.register('students', StudentViewSet)
 router.register('supporters', SupporterViewSet)
-router.register('avaliations', FreeAvaliationViewSet)
+router.register('avaliations', AvaliationViewSet)
 router.register('avaliators', AvaliatorViewSet)
 router.register('criteria', CriterionViewSet)
 router.register('editions', EditionViewSet)

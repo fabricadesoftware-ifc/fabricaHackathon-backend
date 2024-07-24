@@ -1,10 +1,10 @@
-from .aluno import AlunoListSerializer, AlunoCreateSerializer, AlunoRetrieveSerializer
-from .apoiador import ApoiadorListSerializer, ApoiadorRetrieveSerializer, ApoiadorCreateSerializer
-from .avaliacao import AvaliacaoSerializer, AvaliacaoDetailSerializer
-from .avaliador import AvaliadorListSerializer, AvaliadorSerializer
-from .criterio import CriterioListSerializer, CriterioSerializer
-from .curso import CursoListSerializer, CursoSerializer
-from .edicao import EdicaoListSerializer, EdicaoRetrieveSerializer, EdicaoCreateSerializer
-from .equipe import EquipeCreateSerializer, EquipeListSerializer, EquipeRetrieveSerializer
+from .student import StudentListSerializer, StudentCreateSerializer, StudentRetrieveSerializer
+from .supporter import SupporterListSerializer, SupporterRetrieveSerializer, SupporterCreateSerializer
+from .avaliation import AvaliationSerializer, AvaliationDetailSerializer
+from .avaliator import AvaliatorListSerializer, AvaliatorSerializer
+from .criterion import CriterionListSerializer, CriterionSerializer
+from .course import CourseListSerializer, CourseSerializer
+from .edition import EditionListSerializer, EditionRetrieveSerializer, EditionWriteSerializer
+from .team import TeamCreateSerializer, TeamListSerializer, TeamRetrieveSerializer
 from .ranking import RankingDetailSerializer, RankingSerializer
-from .turma import TurmaDetailSerializer, TurmaSerializer
+from .classInfo import ClassInfoDetailSerializer, ClassInfoSerializer

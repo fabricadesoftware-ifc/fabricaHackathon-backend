@@ -9,7 +9,7 @@ class Team(models.Model):
     edition = models.ForeignKey(Edition, on_delete=models.RESTRICT)
     deploy_link = models.URLField(null=True, blank=True)
     repository_link = models.URLField(null=True, blank=True)
-    apresentation_link = models.URLField(null=True, blank=True)
+    presentation_link = models.URLField(null=True, blank=True)
     video_link = models.URLField(null=True, blank=True)
     pitch_link = models.URLField(null=True, blank=True)
     registration_date = models.DateField(auto_now_add=True, null=True, blank=True)

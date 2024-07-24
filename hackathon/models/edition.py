@@ -15,13 +15,14 @@ class Edition(models.Model):
     registration_deadline = models.DateField(null=True, blank=True)
     start_date = models.DateField(null=True, blank=True)
     finish_date = models.DateField(null=True, blank=True)
-    members_per_team = models.IntegerField(null=True, blank=True)
+    min_members = models.IntegerField(null=True, blank=True)
+    max_members = models.IntegerField(null=True, blank=True)
     avaliator = models.ManyToManyField(Avaliator)
     criterion = models.ManyToManyField(Criterion)
 
     def __str__(self):
         return f'{self.year}.{self.semester}'
-    
+
     class Meta:
         verbose_name = 'Edition'
         verbose_name_plural = 'Editions'

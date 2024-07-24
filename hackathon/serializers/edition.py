@@ -1,4 +1,5 @@
 from rest_framework.serializers import ModelSerializer
+from django.core.exceptions import ValidationError
 
 from hackathon.models import Edition
 
@@ -13,7 +14,15 @@ class EditionRetrieveSerializer(ModelSerializer):
         fields = '__all__'
         depth = 1
 
-class EditionCreateSerializer(ModelSerializer):
+class EditionWriteSerializer(ModelSerializer):
     class Meta:
         model = Edition
         fields = '__all__'
+
+    def validate(self, attrs):
+        if min_members_is_greater_than_max_members(attrs):
+            raise ValidationError("Min members cannot exceed max members")
+        return super().validate(attrs)
+
+def min_members_is_greater_than_max_members(attrs):
+    return attrs["max_members"] <= attrs["min_members"]

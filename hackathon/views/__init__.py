@@ -1,6 +1,6 @@
 from .student import StudentViewSet
 from .supporter import SupporterViewSet
-from .avaliation import FreeAvaliationViewSet
+from .avaliation import AvaliationViewSet
 from .avaliator import AvaliatorViewSet
 from .criterion import CriterionViewSet
 from .course import CourseViewSet

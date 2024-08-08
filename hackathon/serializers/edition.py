@@ -3,6 +3,10 @@ from django.core.exceptions import ValidationError
 
 from hackathon.models import Edition
 
+
+def min_members_is_greater_than_max_members(attrs):
+    return attrs["max_members"] <= attrs["min_members"]
+
 class EditionListSerializer(ModelSerializer):
     class Meta:
         model = Edition
@@ -23,6 +27,3 @@ class EditionWriteSerializer(ModelSerializer):
         if min_members_is_greater_than_max_members(attrs):
             raise ValidationError("Min members cannot exceed max members")
         return super().validate(attrs)
-
-def min_members_is_greater_than_max_members(attrs):
-    return attrs["max_members"] <= attrs["min_members"]

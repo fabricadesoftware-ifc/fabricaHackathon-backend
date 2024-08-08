@@ -14,6 +14,13 @@ def validate_team_members(attrs):
     if existing_team_members:
         raise ValidationError(f"Students already in a team for this edition: {', '.join(existing_team_members)}")
 
+def validate_team_name(attrs):
+    teams = Team.objects.filter(edition=attrs['edition'])
+    
+    for team in teams:
+        if team.name == attrs['name']:
+            raise ValidationError(f"Team name already exists.")
+
 
 class TeamListSerializer(ModelSerializer):
     class Meta:
@@ -33,4 +40,5 @@ class TeamCreateSerializer(ModelSerializer):
 
     def validate(self, attrs):
         validate_team_members(attrs)
+        validate_team_name(attrs)
         return attrs

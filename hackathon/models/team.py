@@ -4,6 +4,11 @@ from .student import Student
 from .edition import Edition
 
 class Team(models.Model):
+    STATUS_CHOICES = [
+        ('accepted', 'Accepted'),
+        ('rejected', 'Rejected'),
+        ('pending', 'Pending')
+    ]
     name = models.CharField(max_length=100)
     students = models.ManyToManyField(Student, related_name='students')
     edition = models.ForeignKey(Edition, on_delete=models.RESTRICT)
@@ -16,6 +21,7 @@ class Team(models.Model):
     valid_registration = models.BooleanField(default=False, null=True, blank=True)
     photo_team = models.ImageField(upload_to='teams', null=True, blank=True)
     leader = models.ForeignKey(Student, on_delete=models.RESTRICT, related_name='leader', null=True, blank=True)
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pending') 
 
     def __str__(self):
         return self.name

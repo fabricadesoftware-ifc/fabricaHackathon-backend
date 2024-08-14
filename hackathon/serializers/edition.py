@@ -24,6 +24,7 @@ class EditionWriteSerializer(ModelSerializer):
         fields = '__all__'
 
     def validate(self, attrs):
-        if min_members_is_greater_than_max_members(attrs):
-            raise ValidationError("Min members cannot exceed max members")
+        if hasattr(attrs, "max_members") or hasattr(attrs, "min_members"):
+            if min_members_is_greater_than_max_members(attrs):
+                raise ValidationError("Min members cannot exceed max members")
         return super().validate(attrs)

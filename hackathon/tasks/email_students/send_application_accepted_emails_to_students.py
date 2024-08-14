@@ -1,10 +1,11 @@
 from celery import shared_task
 from django.core.mail import send_mail
 from hackathon.models import Student, Edition
+import os
+from dotenv import load_dotenv
 
 @shared_task
-def send_emails_to_students(edition_id):
-    edition = Edition.objects.get(id=edition_id)
+def send_applications_accepted_emails_to_students(edition):
     courses = edition.courses.all()
     student_emails = list(
         Student.objects.filter(classInfo__id__in=edition.involved_classes.all()).values_list('email', flat=True)
@@ -17,7 +18,7 @@ def send_emails_to_students(edition_id):
     send_mail(
         subject,
         message,
-        'fabrica.hackathon@gmail.com', #from
+        os.getenv("EMAIL_HOST_USER"), #from
         student_emails, #to
         fail_silently=False,
     )

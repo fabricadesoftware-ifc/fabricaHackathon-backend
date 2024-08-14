@@ -1,1 +1,1 @@
-from .send_emails_to_students import send_emails_to_students
+from .email_students.send_application_accepted_emails_to_students import send_applications_accepted_emails_to_students

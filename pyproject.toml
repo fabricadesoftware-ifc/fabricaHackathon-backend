@@ -32,6 +32,7 @@ test = "python manage.py test"
 populate = "python manage.py populate"
 loaddata = "python manage.py loaddata core.json"
 dumpdata = "python manage.py dumpdata --indent 2"
+celery = "celery -A config worker -l info"
 
 [tool.pdm]
 distribution = false

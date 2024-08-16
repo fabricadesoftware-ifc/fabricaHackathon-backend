@@ -3,6 +3,7 @@ from rest_framework.viewsets import ModelViewSet
 from hackathon.models import Team
 from hackathon.serializers import TeamListSerializer, TeamRetrieveSerializer, TeamCreateSerializer
 
+
 class TeamViewSet(ModelViewSet):
     queryset = Team.objects.all()
 

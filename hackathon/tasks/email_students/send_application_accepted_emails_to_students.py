@@ -5,15 +5,14 @@ import os
 from dotenv import load_dotenv
 
 @shared_task
-def send_applications_accepted_emails_to_students(edition):
+def send_applications_accepted_emails_to_students(edition_id):
+    edition = Edition.objects.get(id=edition_id)
     courses = edition.courses.all()
     student_emails = list(
         Student.objects.filter(classInfo__id__in=edition.involved_classes.all()).values_list('email', flat=True)
     )
     subject = f"Inscrições abertas para o Hackathon {edition.year} ({getCourses(courses, ', ')})"
     message = f"As inscrições para o Hackathon {edition.year} estão abertas, inscreva sua equipe! \n Cursos: \n {getCourses(courses, '\n')}"
-
-    print(student_emails)
 
     send_mail(
         subject,

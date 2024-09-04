@@ -3,7 +3,7 @@ from django.db import models
 from .avaliator import Avaliator
 from .course import Course
 from .criterion import Criterion
-from .classInfo import ClassInfo
+from .class_info import ClassInfo
 
 class Edition(models.Model):
     year = models.IntegerField()

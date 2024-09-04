@@ -5,6 +5,8 @@ from .avaliator import AvaliatorViewSet
 from .criterion import CriterionViewSet
 from .course import CourseViewSet
 from .edition import EditionViewSet
-from .team import TeamViewSet
+from .team.team import TeamViewSet
+from .team.accept_team import approve_team
+from .team.reject_team import reject_team
 from .ranking import RankingViewSet
-from .classInfo import ClassInfoViewSet
+from .class_info import ClassInfoViewSet

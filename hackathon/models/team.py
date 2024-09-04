@@ -16,6 +16,7 @@ class Team(models.Model):
     valid_registration = models.BooleanField(default=False, null=True, blank=True)
     photo_team = models.ImageField(upload_to='teams', null=True, blank=True)
     leader = models.ForeignKey(Student, on_delete=models.RESTRICT, related_name='leader')
+    verification_token = models.CharField(max_length=100, blank=True, null=True)
 
     def __str__(self):
         return self.name

@@ -14,6 +14,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
@@ -27,22 +28,35 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
 
-from hackathon.views import StudentViewSet, SupporterViewSet, AvaliationViewSet, AvaliatorViewSet, CriterionViewSet, ClassInfoViewSet, CourseViewSet, EditionViewSet, TeamViewSet
+from hackathon.views import (
+    StudentViewSet,
+    SupporterViewSet,
+    AvaliationViewSet,
+    AvaliatorViewSet,
+    CriterionViewSet,
+    ClassInfoViewSet,
+    CourseViewSet,
+    EditionViewSet,
+    TeamViewSet,
+    approve_team,
+    reject_team,
+)
+
 router = DefaultRouter()
 
-router.register('classes', ClassInfoViewSet)
-router.register('courses', CourseViewSet)
-router.register('students', StudentViewSet)
-router.register('supporters', SupporterViewSet)
-router.register('avaliations', AvaliationViewSet)
-router.register('avaliators', AvaliatorViewSet)
-router.register('criteria', CriterionViewSet)
-router.register('editions', EditionViewSet)
-router.register('teams', TeamViewSet)
+router.register("classes", ClassInfoViewSet)
+router.register("courses", CourseViewSet)
+router.register("students", StudentViewSet)
+router.register("supporters", SupporterViewSet)
+router.register("avaliations", AvaliationViewSet)
+router.register("avaliators", AvaliatorViewSet)
+router.register("criteria", CriterionViewSet)
+router.register("editions", EditionViewSet)
+router.register("teams", TeamViewSet)
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('api/', include(router.urls)),
+    path("admin/", admin.site.urls),
+    path("api/", include(router.urls)),
     path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
     path(
         "api/swagger/",
@@ -56,4 +70,6 @@ urlpatterns = [
     ),
     path("token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
     path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
+    path("accept-team/<str:verification_token>/", approve_team, name="accept-team"),
+    path("reject-work/<str:verification_token>/", reject_team, name="reject-team"),
 ]

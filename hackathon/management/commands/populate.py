@@ -1,8 +1,7 @@
 from django.core.management.base import BaseCommand, CommandError, CommandParser
-from hackathon.management.commands._user import populate_users, populate_students, populate_avaliators,
+from hackathon.management.commands._user import populate_users, populate_students
 from hackathon.management.commands._class import populate_courses, populate_classes
-from hackathon.management.commands._edition import populate_editions, populate_criteria
-from hackathon.management.commands._team import populate_teams
+
 
 
 class Command(BaseCommand):
@@ -37,14 +36,14 @@ class Command(BaseCommand):
         try:
             if options.get("user"):
                 self.__handle_user()
-            if options.get("class"):
-                self.__handle_class()
-            if options.get("edition"):
-                self.__handle_edition()
-            if options.get("team"):
-                self.__handle_team()
-            if options.get("all"):
-                self.__handle_all()
+            # if options.get("class"):
+            #     self.__handle_class()
+            # if options.get("edition"):
+            #     self.__handle_edition()
+            # if options.get("team"):
+            #     self.__handle_team()
+            # if options.get("all"):
+            #     self.__handle_all()
 
             self.stdout.write(self.style.SUCCESS("Data inserted successfully"))
 
@@ -57,41 +56,43 @@ class Command(BaseCommand):
     def __handle_user(self) -> None:
         self.stdout.write("Populating Users...", ending=" ")
 
-        populate_users()
-        populate_students()
-        populate_avaliators()
-
-        self.stdout.write(self.style.SUCCESS("OK"))
-
-    def __handle_class(self) -> None:
-        self.stdout.write("Populating Classes...", ending=" ")
-
         populate_courses()
         populate_classes()
+        populate_users()
+        populate_students()
+    #     populate_avaliators()
 
-        self.stdout.write(self.style.SUCCESS("OK"))
+    #     self.stdout.write(self.style.SUCCESS("OK"))
 
-    def __handle_edition(self) -> None:
-        self.stdout.write("Populating Editions...", ending=" ")
+    # def __handle_class(self) -> None:
+    #     self.stdout.write("Populating Classes...", ending=" ")
 
-        populate_editions()
-        populate_criteria()
+    #     populate_courses()
+    #     populate_classes()
 
-        self.stdout.write(self.style.SUCCESS("OK"))
+    #     self.stdout.write(self.style.SUCCESS("OK"))
 
-    def __handle_team(self) -> None:
-        self.stdout.write("Populating Teams...", ending=" ")
+    # def __handle_edition(self) -> None:
+    #     self.stdout.write("Populating Editions...", ending=" ")
 
-        populate_teams()
+    #     populate_editions()
+    #     populate_criteria()
 
-        self.stdout.write(self.style.SUCCESS("OK"))
+    #     self.stdout.write(self.style.SUCCESS("OK"))
 
-    def __handle_all(self) -> None:
-        self.stdout.write("Populating Everything...", ending=" ")
+    # def __handle_team(self) -> None:
+    #     self.stdout.write("Populating Teams...", ending=" ")
 
-        self.__handle_user()
-        self.__handle_class()
-        self.__handle_edition()
-        self.__handle_team()
+    #     populate_teams()
 
-        self.stdout.write(self.style.SUCCESS("OK"))
+    #     self.stdout.write(self.style.SUCCESS("OK"))
+
+    # def __handle_all(self) -> None:
+    #     self.stdout.write("Populating Everything...", ending=" ")
+
+    #     self.__handle_user()
+    #     self.__handle_class()
+    #     self.__handle_edition()
+    #     self.__handle_team()
+
+    #     self.stdout.write(self.style.SUCCESS("OK"))

@@ -164,4 +164,15 @@ teams = [
         "valid_registration": False,
         "photo_team": "teams/photo_team.jpg",
     },
+    {
+        "name": "Time 16",
+        "deploy_link": "https://deploy.com",
+        "repository_link": "https://repository.com",
+        "presentation_link": "https://presentation.com",
+        "video_link": "https://video.com",
+        "pitch_link": "https://pitch.com",
+        "registration_date": "2025-01-15",
+        "valid_registration": False,
+        "photo_team": "teams/photo_team.jpg",
+    },
 ]

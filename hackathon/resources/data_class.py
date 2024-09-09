@@ -44,6 +44,66 @@ classes = [
     {
         "name": "BSI6",
     },
+    {
+        "name": "MCC1",
+    },
+    {
+        "name": "MCC2",
+    },
+    {
+        "name": "MCC3",
+    },
+    {
+        "name": "MCC4",
+    },
+    {
+        "name": "MCC5",
+    },
+    {
+        "name": "MCC6",
+    },
+    {
+        "name": "MCC7",
+    },
+    {
+        "name": "MCC8",
+    },
+    {
+        "name": "MCC9",
+    },
+    {
+        "name": "MCC10",
+    },
+    {
+        "name": "DCC1",
+    },
+    {
+        "name": "DCC2",
+    },
+    {
+        "name": "DCC3",
+    },
+    {
+        "name": "DCC4",
+    },
+    {
+        "name": "DCC5",
+    },
+    {
+        "name": "DCC6",
+    },
+    {
+        "name": "DCC7",
+    },
+    {
+        "name": "DCC8",
+    },
+    {
+        "name": "DCC9",
+    },
+    {
+        "name": "DCC10",
+    },
 ]
 
 courses = [
@@ -54,7 +114,7 @@ courses = [
         "course_level": "tech"
     },
     {
-        "name": "Bacharelado em Sistemas de INFOrmação",
+        "name": "Bacharelado em Sistemas de Informação",
         "workload": 2000,
         "acronym": "BSI",
         "course_level": "grad"

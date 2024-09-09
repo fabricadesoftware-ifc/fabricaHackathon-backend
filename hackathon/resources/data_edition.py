@@ -81,29 +81,65 @@ editions = [
     },
 ]
 
-criteria = [
+ranking = [
     {
-        "description": "Inovação",
-        "weight": 0.2,
+        "classification": 1,
+        "final_grade": 9.5,
     },
     {
-        "description": "Usabilidade",
-        "weight": 0.2,
+        "classification": 2,
+        "final_grade": 9.4,
     },
     {
-        "description": "Escalabilidade",
-        "weight": 0.2,
+        "classification": 3,
+        "final_grade": 9.3,
     },
     {
-        "description": "Manutenibilidade",
-        "weight": 0.2,
+        "classification": 4,
+        "final_grade": 9.2,
     },
     {
-        "description": "Documentação",
-        "weight": 0.1,
+        "classification": 5,
+        "final_grade": 9.1,
     },
     {
-        "description": "Apresentação",
-        "weight": 0.1,
+        "classification": 6,
+        "final_grade": 9.0,
+    },
+    {
+        "classification": 7,
+        "final_grade": 8.9,
+    },
+    {
+        "classification": 8,
+        "final_grade": 8.8,
+    },
+    {
+        "classification": 9,
+        "final_grade": 8.7,
+    },
+    {
+        "classification": 10,
+        "final_grade": 8.6,
+    },
+    {
+        "classification": 11,
+        "final_grade": 8.5,
+    },
+    {
+        "classification": 12,
+        "final_grade": 8.4,
+    },
+    {
+        "classification": 13,
+        "final_grade": 8.3,
+    },
+    {
+        "classification": 14,
+        "final_grade": 8.2,
+    },
+    {
+        "classification": 15,
+        "final_grade": 8.1,
     },
 ]

@@ -17,8 +17,8 @@ class Edition(models.Model):
     finish_date = models.DateField(null=True, blank=True)
     min_members = models.IntegerField(null=True, blank=True)
     max_members = models.IntegerField(null=True, blank=True)
-    avaliator = models.ManyToManyField(Avaliator)
-    criterion = models.ManyToManyField(Criterion)
+    avaliators = models.ManyToManyField(Avaliator)
+    criteria = models.ManyToManyField(Criterion)
 
     def __str__(self):
         return f'{self.year}.{self.semester}'

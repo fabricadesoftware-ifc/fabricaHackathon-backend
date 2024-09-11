@@ -38,6 +38,8 @@ from hackathon.views import (
     CourseViewSet,
     EditionViewSet,
     TeamViewSet,
+    RankingViewSet,
+    CategoryViewSet,
     approve_team,
     reject_team,
 )
@@ -53,6 +55,8 @@ router.register("avaliators", AvaliatorViewSet)
 router.register("criteria", CriterionViewSet)
 router.register("editions", EditionViewSet)
 router.register("teams", TeamViewSet)
+router.register("rankings", RankingViewSet)
+router.register("categories", CategoryViewSet)
 
 urlpatterns = [
     path("admin/", admin.site.urls),

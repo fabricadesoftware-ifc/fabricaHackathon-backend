@@ -1,6 +1,5 @@
-from hackathon.models import Team, Student, Edition
-from hackathon.resources.data_team import teams
-
+from hackathon.models import Team, Student, Edition, Category
+from hackathon.resources.data_team import teams, categories
 
 def populate_teams():
     if Team.objects.exists():
@@ -32,6 +31,13 @@ def populate_teams():
             team.leader = Student.objects.filter(
                 class_info__course__acronym__in=["INFO", "BSI"]
             ).first()
+        
+        edition_categories = Category.objects.filter(edition=team.edition)
+
+        if index < len(edition_categories):
+            team.category = edition_categories[index]
+        else:
+            team.category = edition_categories[index % len(edition_categories)]
 
     Team.objects.bulk_create(teams_to_insert)
 
@@ -46,3 +52,18 @@ def populate_teams():
             team.students.set(
                 Student.objects.filter(class_info__course__acronym__in=["INFO", "BSI"])
             )
+        
+def populate_categories():
+    if Category.objects.exists():
+        return
+
+    categories_to_insert = [Category(**category) for category in categories]
+    editions = list(Edition.objects.all())
+    
+    for index, category in enumerate(categories_to_insert):
+        if index < len(editions):
+            category.edition = editions[index]
+        else:
+            category.edition = editions[index % len(editions)]
+        
+    Category.objects.bulk_create(categories_to_insert)

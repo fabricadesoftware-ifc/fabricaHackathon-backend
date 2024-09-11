@@ -8,3 +8,4 @@ from .edition import EditionListSerializer, EditionRetrieveSerializer, EditionWr
 from .team import TeamCreateSerializer, TeamListSerializer, TeamRetrieveSerializer
 from .ranking import RankingDetailSerializer, RankingSerializer
 from .class_info import ClassInfoSerializer, ClassInfoDetailSerializer
+from .category import CategorySerializer

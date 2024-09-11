@@ -1,6 +1,5 @@
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
-from rest_framework import status
 from hackathon.models import Edition
 from hackathon.serializers import EditionWriteSerializer, EditionListSerializer, EditionRetrieveSerializer
 from hackathon.signals import applications_accepted_changed

@@ -176,3 +176,70 @@ teams = [
         "photo_team": "teams/photo_team.jpg",
     },
 ]
+
+categories = [
+    {
+        "name": "Category 1",
+        "description": "Description 1",
+    },
+    {
+        "name": "Category 2",
+        "description": "Description 2",
+    },
+    {
+        "name": "Category 3",
+        "description": "Description 3",
+    },
+    {
+        "name": "Category 4",
+        "description": "Description 4",
+    },
+    {
+        "name": "Category 5",
+        "description": "Description 5",
+    },
+    {
+        "name": "Category 6",
+        "description": "Description 6",
+    },
+    {
+        "name": "Category 7",
+        "description": "Description 7",
+    },
+    {
+        "name": "Category 8",
+        "description": "Description 8",
+    },
+    {
+        "name": "Category 9",
+        "description": "Description 9",
+    },
+    {
+        "name": "Category 10",
+        "description": "Description 10",
+    },
+    {
+        "name": "Category 11",
+        "description": "Description 11",
+    },
+    {
+        "name": "Category 12",
+        "description": "Description 12",
+    },
+    {
+        "name": "Category 13",
+        "description": "Description 13",
+    },
+    {
+        "name": "Category 14",
+        "description": "Description 14",
+    },
+    {
+        "name": "Category 15",
+        "description": "Description 15",
+    },
+    {
+        "name": "Category 16",
+        "description": "Description 16",
+    },
+]

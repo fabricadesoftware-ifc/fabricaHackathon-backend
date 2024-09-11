@@ -1,6 +1,5 @@
 from rest_framework.viewsets import ModelViewSet
-
-from hackathon.models import ClassInfo
+from hackathon.models.class_info import ClassInfo
 from hackathon.serializers import ClassInfoDetailSerializer, ClassInfoSerializer
 
 class ClassInfoViewSet(ModelViewSet):

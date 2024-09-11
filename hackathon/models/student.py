@@ -1,11 +1,11 @@
 from django.db import models
 
-from .classInfo import ClassInfo
+from .class_info import ClassInfo
 
 class Student(models.Model):
     name = models.CharField(max_length=100)
     registration = models.CharField(max_length=10)
-    classInfo = models.ForeignKey(ClassInfo, on_delete=models.RESTRICT, verbose_name='class')
+    class_info = models.ForeignKey(ClassInfo, on_delete=models.RESTRICT, verbose_name='class')
     whatsapp = models.CharField(max_length=15)
     email = models.EmailField()
     github = models.URLField()

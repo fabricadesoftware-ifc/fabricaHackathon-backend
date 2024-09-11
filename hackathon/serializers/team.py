@@ -25,7 +25,7 @@ def validate_team_name(attrs):
 class TeamListSerializer(ModelSerializer):
     class Meta:
         model = Team
-        fields = ('id', 'name', 'edition', 'photo_team')
+        fields = ('id', 'name', 'edition', 'photo_team', 'valid_registration', 'category')
 
 class TeamRetrieveSerializer(ModelSerializer):
     class Meta:

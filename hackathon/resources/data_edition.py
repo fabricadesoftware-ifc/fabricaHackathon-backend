@@ -1,0 +1,145 @@
+editions = [
+    {
+        "year": 2024,
+        "semester": 1,
+        "applications_accepted": True,
+        "registration_deadline": "2024-07-01",
+        "start_date": "2024-07-15",
+        "finish_date": "2024-12-15",
+        "min_members": 1,
+        "max_members": 5,
+    },
+    {
+        "year": 2024,
+        "semester": 2,
+        "applications_accepted": True,
+        "registration_deadline": "2024-12-01",
+        "start_date": "2025-01-15",
+        "finish_date": "2025-06-15",
+        "min_members": 1,
+        "max_members": 5,
+    },
+    {
+        "year": 2025,
+        "semester": 1,
+        "applications_accepted": True,
+        "registration_deadline": "2025-07-01",
+        "start_date": "2025-07-15",
+        "finish_date": "2025-12-15",
+        "min_members": 1,
+        "max_members": 5,
+    },
+    {
+        "year": 2025,
+        "semester": 2,
+        "applications_accepted": True,
+        "registration_deadline": "2025-12-01",
+        "start_date": "2026-01-15",
+        "finish_date": "2026-06-15",
+        "min_members": 1,
+        "max_members": 5,
+    },
+    {
+        "year": 2026,
+        "semester": 1,
+        "applications_accepted": True,
+        "registration_deadline": "2026-07-01",
+        "start_date": "2026-07-15",
+        "finish_date": "2026-12-15",
+        "min_members": 1,
+        "max_members": 5,
+    },
+    {
+        "year": 2026,
+        "semester": 2,
+        "applications_accepted": True,
+        "registration_deadline": "2026-12-01",
+        "start_date": "2027-01-15",
+        "finish_date": "2027-06-15",
+        "min_members": 1,
+        "max_members": 5,
+    },
+    {
+        "year": 2027,
+        "semester": 1,
+        "applications_accepted": True,
+        "registration_deadline": "2027-07-01",
+        "start_date": "2027-07-15",
+        "finish_date": "2027-12-15",
+        "min_members": 1,
+        "max_members": 5,
+    },
+    {
+        "year": 2027,
+        "semester": 2,
+        "applications_accepted": True,
+        "registration_deadline": "2027-12-01",
+        "start_date": "2028-01-15",
+        "finish_date": "2028-06-15",
+        "min_members": 1,
+        "max_members": 5,
+    },
+]
+
+ranking = [
+    {
+        "classification": 1,
+        "final_grade": 9.5,
+    },
+    {
+        "classification": 2,
+        "final_grade": 9.4,
+    },
+    {
+        "classification": 3,
+        "final_grade": 9.3,
+    },
+    {
+        "classification": 4,
+        "final_grade": 9.2,
+    },
+    {
+        "classification": 5,
+        "final_grade": 9.1,
+    },
+    {
+        "classification": 6,
+        "final_grade": 9.0,
+    },
+    {
+        "classification": 7,
+        "final_grade": 8.9,
+    },
+    {
+        "classification": 8,
+        "final_grade": 8.8,
+    },
+    {
+        "classification": 9,
+        "final_grade": 8.7,
+    },
+    {
+        "classification": 10,
+        "final_grade": 8.6,
+    },
+    {
+        "classification": 11,
+        "final_grade": 8.5,
+    },
+    {
+        "classification": 12,
+        "final_grade": 8.4,
+    },
+    {
+        "classification": 13,
+        "final_grade": 8.3,
+    },
+    {
+        "classification": 14,
+        "final_grade": 8.2,
+    },
+    {
+        "classification": 15,
+        "final_grade": 8.1,
+    },
+]

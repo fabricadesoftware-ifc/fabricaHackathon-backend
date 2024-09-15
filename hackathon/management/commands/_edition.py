@@ -19,11 +19,11 @@ def populate_editions():
         if index % 2 == 0:
             courses = list(Course.objects.filter(acronym__in=["MCC", "DCC"]))
             classes = list(ClassInfo.objects.filter(course__acronym__in=["MCC", "DCC"]))
-            categories = list(Category.objects.filter(id__lt=all_categories[len(all_categories)//2].id))
+            categories = list(Category.objects.filter(id__lt=len(all_categories)//2))
         else:
             courses = list(Course.objects.filter(acronym__in=["INFO", "BSI"]))
             classes = list(ClassInfo.objects.filter(course__acronym__in=["INFO", "BSI"]))
-            categories = list(Category.objects.filter(id__gte=all_categories[len(all_categories)//2].id))
+            categories = list(Category.objects.filter(id__gte=len(all_categories)//2))
         
         edition.courses.set(courses)
         edition.avaliators.set(avaliators)

@@ -16,6 +16,7 @@ dependencies = [
     "django-celery-results>=2.5.1",
     "dotenv>=0.0.5",
     "python-dotenv>=1.0.1",
+    "django-filter>=24.3",
 ]
 requires-python = "==3.12.*"
 readme = "README.md"

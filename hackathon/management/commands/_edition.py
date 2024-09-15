@@ -1,6 +1,5 @@
-from hackathon.models import Course, Edition, Avaliator, Criterion
+from hackathon.models import Course, Edition, Avaliator, Criterion, ClassInfo
 from hackathon.resources.data_edition import editions
-from hackathon.resources.data_avaliation import criteria
 
 def populate_editions():
     if Edition.objects.exists():
@@ -17,9 +16,12 @@ def populate_editions():
     for index, edition in enumerate(created_editions):
         if index % 2 == 0:
             courses = list(Course.objects.filter(acronym__in=["MCC", "DCC"]))
+            classes = list(ClassInfo.objects.filter(course__acronym__in=["MCC", "DCC"]))
         else:
             courses = list(Course.objects.filter(acronym__in=["INFO", "BSI"]))
+            classes = list(ClassInfo.objects.filter(course__acronym__in=["INFO", "BSI"]))
         
         edition.courses.set(courses)
         edition.avaliators.set(avaliators)
         edition.criteria.set(criteria)
+        edition.involved_classes.set(classes)

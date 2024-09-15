@@ -11,7 +11,8 @@ from hackathon.management.commands._avaliation import (
     populate_avaliations,
 )
 from hackathon.management.commands._ranking import populate_rankings
-from hackathon.management.commands._team import populate_teams, populate_categories
+from hackathon.management.commands._team import populate_teams
+from hackathon.management.commands._category import populate_categories
 from hackathon.management.commands._supporter import populate_supporters
 
 
@@ -53,6 +54,11 @@ class Command(BaseCommand):
             help="Inserts ranking data in the database for testing (Rankings)",
         )
         parser.add_argument(
+            "--category",
+            action="store_true",
+            help="Inserts category data in the database for testing (Categories)",
+        )
+        parser.add_argument(
             "--all",
             action="store_true",
             help="Inserts all data in the database for testing",
@@ -74,6 +80,8 @@ class Command(BaseCommand):
                 self.__handle_supporter()
             if options.get("ranking"):
                 self.__handle_ranking()
+            if options.get("category"):
+                self.__handle_category()
             if options.get("all"):
                 self.__handle_all()
 
@@ -121,10 +129,6 @@ class Command(BaseCommand):
         self.stdout.write(self.style.SUCCESS("OK"))
 
     def __handle_team(self) -> None:
-        self.stdout.write("Populating Categories...", ending=" ")
-        populate_categories()
-        self.stdout.write(self.style.SUCCESS("OK"))
-
         self.stdout.write("Populating Teams...", ending=" ")
         populate_teams()
         self.stdout.write(self.style.SUCCESS("OK"))
@@ -139,15 +143,21 @@ class Command(BaseCommand):
         populate_rankings()
         self.stdout.write(self.style.SUCCESS("OK"))
 
+    def __handle_category(self) -> None:
+        self.stdout.write("Populating Categories...", ending=" ")
+        populate_categories()
+        self.stdout.write(self.style.SUCCESS("OK"))
+
     def __handle_all(self) -> None:
         self.stdout.write("Populating Everything...", ending=" ")
 
         self.__handle_class()
         self.__handle_user()
         self.__handle_avaliation()
+        self.__handle_category()
+        self.__handle_supporter()
         self.__handle_edition()
         self.__handle_team()
         self.__handle_ranking()
-        self.__handle_supporter()
 
         self.stdout.write(self.style.SUCCESS("OK"))

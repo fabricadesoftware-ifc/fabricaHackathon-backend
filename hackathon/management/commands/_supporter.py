@@ -6,12 +6,5 @@ def populate_supporters():
         return
 
     supporters_to_insert = [Supporter(**supporter) for supporter in supporters]
-    editions = list(Edition.objects.all())
-
-    for index, supporter in enumerate(supporters_to_insert):
-        if index < len(editions):
-            supporter.edition = editions[index]
-        else:
-            supporter.edition = editions[index % len(editions)]
 
     Supporter.objects.bulk_create(supporters_to_insert)

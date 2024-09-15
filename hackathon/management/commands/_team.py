@@ -32,7 +32,7 @@ def populate_teams():
                 class_info__course__acronym__in=["INFO", "BSI"]
             ).first()
         
-        edition_categories = Category.objects.filter(edition=team.edition)
+        edition_categories = list(team.edition.categories.all())
 
         if index < len(edition_categories):
             team.category = edition_categories[index]
@@ -53,17 +53,3 @@ def populate_teams():
                 Student.objects.filter(class_info__course__acronym__in=["INFO", "BSI"])
             )
         
-def populate_categories():
-    if Category.objects.exists():
-        return
-
-    categories_to_insert = [Category(**category) for category in categories]
-    editions = list(Edition.objects.all())
-    
-    for index, category in enumerate(categories_to_insert):
-        if index < len(editions):
-            category.edition = editions[index]
-        else:
-            category.edition = editions[index % len(editions)]
-        
-    Category.objects.bulk_create(categories_to_insert)

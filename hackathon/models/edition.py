@@ -4,6 +4,8 @@ from .avaliator import Avaliator
 from .course import Course
 from .criterion import Criterion
 from .class_info import ClassInfo
+from .category import Category
+from .supporter import Supporter
 
 class Edition(models.Model):
     year = models.IntegerField()
@@ -19,6 +21,8 @@ class Edition(models.Model):
     max_members = models.IntegerField(null=True, blank=True)
     avaliators = models.ManyToManyField(Avaliator)
     criteria = models.ManyToManyField(Criterion)
+    categories = models.ManyToManyField(Category)
+    supporters = models.ManyToManyField(Supporter)
 
     def __str__(self):
         return f'{self.year}.{self.semester}'

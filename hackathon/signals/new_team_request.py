@@ -19,6 +19,8 @@ def handle_new_team_request(sender, instance, created, **kwargs):
         reject_team_path = reverse("reject-team", kwargs={"verification_token": token})
         reject_team_link = f"http://localhost:8000/{reject_team_path}"
 
+        print(instance.id, accept_team_link, reject_team_link)
+
         send_new_team_request_email_to_teachers.delay(
             instance.id, accept_team_link, reject_team_link
         )

@@ -23,7 +23,7 @@ def reject_team(request, verification_token) -> Response:
 
     edition = Edition.objects.get(id=team.edition.id)
 
-    if edition.registration_deadline > timezone.now():
+    if edition.registration_deadline > timezone.now().date():
         team.verification_token = None
         team.valid_registration = True
         team.save()

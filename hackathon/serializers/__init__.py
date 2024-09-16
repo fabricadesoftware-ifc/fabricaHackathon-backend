@@ -5,7 +5,7 @@ from .avaliator import AvaliatorListSerializer, AvaliatorSerializer
 from .criterion import CriterionListSerializer, CriterionSerializer
 from .course import CourseListSerializer, CourseSerializer
 from .edition import EditionListSerializer, EditionRetrieveSerializer, EditionWriteSerializer
-from .team import TeamCreateSerializer, TeamListSerializer, TeamRetrieveSerializer
+from .team import TeamCreateSerializer, TeamListSerializer, TeamRetrieveSerializer, TeamUpdateSerializer
 from .ranking import RankingDetailSerializer, RankingSerializer
 from .class_info import ClassInfoSerializer, ClassInfoDetailSerializer
 from .category import CategorySerializer

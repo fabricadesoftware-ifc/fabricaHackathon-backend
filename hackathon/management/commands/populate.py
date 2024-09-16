@@ -3,6 +3,7 @@ from hackathon.management.commands._user import (
     populate_users,
     populate_students,
     populate_avaliators,
+    populate_teachers,
 )
 from hackathon.management.commands._class import populate_courses, populate_classes
 from hackathon.management.commands._edition import populate_editions
@@ -104,6 +105,10 @@ class Command(BaseCommand):
 
         self.stdout.write("Populating Avaliators...", ending=" ")
         populate_avaliators()
+        self.stdout.write(self.style.SUCCESS("OK"))
+
+        self.stdout.write("Populating Teachers...", ending=" ")
+        populate_teachers()
         self.stdout.write(self.style.SUCCESS("OK"))
 
     def __handle_class(self) -> None:

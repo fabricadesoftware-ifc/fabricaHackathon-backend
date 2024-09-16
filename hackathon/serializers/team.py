@@ -42,3 +42,8 @@ class TeamCreateSerializer(ModelSerializer):
         validate_team_members(attrs)
         validate_team_name(attrs)
         return attrs
+    
+class TeamUpdateSerializer(ModelSerializer):
+    class Meta:
+        model = Team
+        fields = '__all__'

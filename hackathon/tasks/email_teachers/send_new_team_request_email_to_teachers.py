@@ -9,6 +9,7 @@ def send_new_team_request_email_to_teachers(
     team_id, accept_team_link, reject_team_link
 ):
     team = Team.objects.get(id=team_id)
+    print(team)
     edition = team.edition
     students = team.students.all()
     leader = team.leader

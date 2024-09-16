@@ -1,7 +1,7 @@
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from hackathon.models import Student, Avaliator, ClassInfo
 
-from hackathon.resources.data_user import students, avaliators
+from hackathon.resources.data_user import students, avaliators, teachers
 
 
 def __get_or_create_super_user() -> None:
@@ -42,3 +42,22 @@ def populate_avaliators():
 
     avaliators_to_insert = [Avaliator(**aval) for aval in avaliators]
     Avaliator.objects.bulk_create(avaliators_to_insert)
+
+def populate_teachers():
+    if Group.objects.exists():
+        return
+    
+    teachers_group, created = Group.objects.get_or_create(name="Teachers")
+
+    teachers_to_insert = [
+        User.objects.create_user(
+            username=teacher["name"],
+            email=teacher["email"],
+            password=teacher["password"],
+        )
+        for teacher in teachers
+    ]
+
+    for teacher in teachers_to_insert:
+        teacher.groups.add(teachers_group)
+        teacher.save()

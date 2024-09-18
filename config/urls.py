@@ -30,6 +30,7 @@ from rest_framework_simplejwt.views import (
 
 from hackathon.views import (
     StudentViewSet,
+    AvailableStudentViewSet,
     SupporterViewSet,
     AvaliationViewSet,
     AvaliatorViewSet,
@@ -57,6 +58,7 @@ router.register("editions", EditionViewSet)
 router.register("teams", TeamViewSet)
 router.register("rankings", RankingViewSet)
 router.register("categories", CategoryViewSet)
+router.register("available-students", AvailableStudentViewSet, basename="available-students")
 
 urlpatterns = [
     path("admin/", admin.site.urls),

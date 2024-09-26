@@ -3,7 +3,7 @@ name = "fabrica-hackathon"
 version = "0.1.0"
 description = "Default template for PDM package"
 authors = [
-    {name = "fabricaDeSoftware", email = "="},
+    {name = "fabricaDeSoftware", email = ""},
 ]
 dependencies = [
     "django>=5.0.4",
@@ -17,6 +17,7 @@ dependencies = [
     "dotenv>=0.0.5",
     "python-dotenv>=1.0.1",
     "django-filter>=24.3",
+    "django-base64field>=1.0",
 ]
 requires-python = "==3.12.*"
 readme = "README.md"

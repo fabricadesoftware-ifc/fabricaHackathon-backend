@@ -1,5 +1,4 @@
 from django.db import models
-
 from .avaliator import Avaliator
 from .course import Course
 from .criterion import Criterion
@@ -7,12 +6,13 @@ from .class_info import ClassInfo
 from .category import Category
 from .supporter import Supporter
 
+
 class Edition(models.Model):
     year = models.IntegerField()
     semester = models.IntegerField()
     courses = models.ManyToManyField(Course)
     involved_classes = models.ManyToManyField(ClassInfo)
-    edition_photo = models.ImageField(upload_to='editions', null=True, blank=True)
+    edition_photo_base64 = models.TextField(null=True, blank=True)
     applications_accepted = models.BooleanField(default=True, null=True, blank=True)
     registration_deadline = models.DateField(null=True, blank=True)
     start_date = models.DateField(null=True, blank=True)
@@ -25,9 +25,9 @@ class Edition(models.Model):
     supporters = models.ManyToManyField(Supporter)
 
     def __str__(self):
-        return f'{self.year}.{self.semester}'
+        return f"{self.year}.{self.semester}"
 
     class Meta:
-        verbose_name = 'Edition'
-        verbose_name_plural = 'Editions'
-        ordering = ['year', 'semester']
+        verbose_name = "Edition"
+        verbose_name_plural = "Editions"
+        ordering = ["year", "semester"]

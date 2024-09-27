@@ -8,6 +8,7 @@ from hackathon.models import (
     ClassInfo,
     Category,
     Supporter,
+    Images,
 )
 from hackathon.resources.data_edition import editions
 
@@ -37,8 +38,25 @@ def populate_editions():
     editions_to_insert = []
     for edition in editions:
         edition_photo_base64 = fetch_random_image_base64()
-        edition["edition_photo_base64"] = edition_photo_base64
-        editions_to_insert.append(Edition(**edition))
+
+        if edition_photo_base64:
+            image_instance = Images.objects.create(photo_base64=edition_photo_base64)
+        else:
+            image_instance = None
+
+        new_edition = Edition(
+            year=edition["year"],
+            semester=edition["semester"],
+            photo_base64_edition=image_instance,
+            applications_accepted=edition["applications_accepted"],
+            registration_deadline=edition["registration_deadline"],
+            start_date=edition["start_date"],
+            finish_date=edition["finish_date"],
+            min_members=edition["min_members"],
+            max_members=edition["max_members"],
+        )
+
+        editions_to_insert.append(new_edition)
 
     avaliators = list(Avaliator.objects.all())
     criteria = list(Criterion.objects.all())

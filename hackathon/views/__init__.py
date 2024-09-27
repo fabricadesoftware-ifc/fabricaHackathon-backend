@@ -12,3 +12,4 @@ from .team.reject_team import reject_team
 from .ranking import RankingViewSet
 from .class_info import ClassInfoViewSet
 from .category import CategoryViewSet
+from .images import ImagesViewSet

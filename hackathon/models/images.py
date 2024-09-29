@@ -5,7 +5,7 @@ class Images(models.Model):
     description = models.CharField(max_length=255, null=True, blank=True)
 
     def __str__(self):
-        return self.description
+        return self.description or 'No description'
 
     class Meta:
         verbose_name = "Image"

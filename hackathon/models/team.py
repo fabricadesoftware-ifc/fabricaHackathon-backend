@@ -3,6 +3,7 @@ from django.db import models
 from .student import Student
 from .edition import Edition
 from .category import Category
+from .images import Images
 
 class Team(models.Model):
     name = models.CharField(max_length=100)
@@ -15,7 +16,8 @@ class Team(models.Model):
     pitch_link = models.URLField(null=True, blank=True)
     registration_date = models.DateField(auto_now_add=True, null=True, blank=True)
     valid_registration = models.BooleanField(default=False, null=True, blank=True)
-    photo_team = models.ImageField(upload_to='teams', null=True, blank=True)
+    # photo_team = models.ImageField(upload_to='teams', null=True, blank=True)
+    photo_base64_team= models.OneToOneField(Images, on_delete=models.CASCADE, null=True, blank=True)
     leader = models.ForeignKey(Student, on_delete=models.RESTRICT, related_name='leader')
     category = models.ForeignKey('Category', on_delete=models.RESTRICT, null=True, blank=True)
     verification_token = models.CharField(max_length=100, blank=True, null=True)

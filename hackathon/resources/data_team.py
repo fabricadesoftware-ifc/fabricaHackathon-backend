@@ -8,7 +8,6 @@ teams = [
         "pitch_link": "https://pitch.com",
         "registration_date": "2025-01-15",
         "valid_registration": False,
-        "photo_team": "teams/photo_team.jpg",
     },
     {
         "name": "Time 2",
@@ -19,7 +18,6 @@ teams = [
         "pitch_link": "https://pitch.com",
         "registration_date": "2025-01-15",
         "valid_registration": False,
-        "photo_team": "teams/photo_team.jpg",
     },
     {
         "name": "Time 3",
@@ -30,7 +28,6 @@ teams = [
         "pitch_link": "https://pitch.com",
         "registration_date": "2025-01-15",
         "valid_registration": False,
-        "photo_team": "teams/photo_team.jpg",
     },
     {
         "name": "Time 4",
@@ -41,7 +38,6 @@ teams = [
         "pitch_link": "https://pitch.com",
         "registration_date": "2025-01-15",
         "valid_registration": False,
-        "photo_team": "teams/photo_team.jpg",
     },
     {
         "name": "Time 5",
@@ -52,7 +48,6 @@ teams = [
         "pitch_link": "https://pitch.com",
         "registration_date": "2025-01-15",
         "valid_registration": False,
-        "photo_team": "teams/photo_team.jpg",
     },
     {
         "name": "Time 6",
@@ -63,7 +58,6 @@ teams = [
         "pitch_link": "https://pitch.com",
         "registration_date": "2025-01-15",
         "valid_registration": False,
-        "photo_team": "teams/photo_team.jpg",
     },
     {
         "name": "Time 7",
@@ -74,7 +68,6 @@ teams = [
         "pitch_link": "https://pitch.com",
         "registration_date": "2025-01-15",
         "valid_registration": False,
-        "photo_team": "teams/photo_team.jpg",
     },
     {
         "name": "Time 8",
@@ -85,7 +78,6 @@ teams = [
         "pitch_link": "https://pitch.com",
         "registration_date": "2025-01-15",
         "valid_registration": False,
-        "photo_team": "teams/photo_team.jpg",
     },
     {
         "name": "Time 9",
@@ -96,7 +88,6 @@ teams = [
         "pitch_link": "https://pitch.com",
         "registration_date": "2025-01-15",
         "valid_registration": False,
-        "photo_team": "teams/photo_team.jpg",
     },
     {
         "name": "Time 10",
@@ -107,7 +98,6 @@ teams = [
         "pitch_link": "https://pitch.com",
         "registration_date": "2025-01-15",
         "valid_registration": False,
-        "photo_team": "teams/photo_team.jpg",
     },
     {
         "name": "Time 11",
@@ -118,7 +108,6 @@ teams = [
         "pitch_link": "https://pitch.com",
         "registration_date": "2025-01-15",
         "valid_registration": False,
-        "photo_team": "teams/photo_team.jpg",
     },
     {
         "name": "Time 12",
@@ -129,7 +118,6 @@ teams = [
         "pitch_link": "https://pitch.com",
         "registration_date": "2025-01-15",
         "valid_registration": False,
-        "photo_team": "teams/photo_team.jpg",
     },
     {
         "name": "Time 13",
@@ -140,7 +128,6 @@ teams = [
         "pitch_link": "https://pitch.com",
         "registration_date": "2025-01-15",
         "valid_registration": False,
-        "photo_team": "teams/photo_team.jpg",
     },
     {
         "name": "Time 14",
@@ -151,7 +138,6 @@ teams = [
         "pitch_link": "https://pitch.com",
         "registration_date": "2025-01-15",
         "valid_registration": False,
-        "photo_team": "teams/photo_team.jpg",
     },
     {
         "name": "Time 15",
@@ -162,7 +148,6 @@ teams = [
         "pitch_link": "https://pitch.com",
         "registration_date": "2025-01-15",
         "valid_registration": False,
-        "photo_team": "teams/photo_team.jpg",
     },
     {
         "name": "Time 16",
@@ -173,7 +158,6 @@ teams = [
         "pitch_link": "https://pitch.com",
         "registration_date": "2025-01-15",
         "valid_registration": False,
-        "photo_team": "teams/photo_team.jpg",
     },
 ]
 

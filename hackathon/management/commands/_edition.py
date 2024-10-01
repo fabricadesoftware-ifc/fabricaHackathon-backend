@@ -1,11 +1,63 @@
-from hackathon.models import Course, Edition, Avaliator, Criterion, ClassInfo, Category, Supporter
+import base64
+import requests
+from hackathon.models import (
+    Course,
+    Edition,
+    Avaliator,
+    Criterion,
+    ClassInfo,
+    Category,
+    Supporter,
+    Images,
+)
 from hackathon.resources.data_edition import editions
+
+
+def fetch_random_image_base64():
+    url = "https://random.imagecdn.app/v1/image?width=1280&height=720&category=dogs&format=json"
+
+    response = requests.get(url)
+    if response.status_code == 200:
+        data = response.json()
+
+        image_url = data.get("url")
+
+        if image_url:
+            image_response = requests.get(image_url)
+
+            if image_response.status_code == 200:
+                return base64.b64encode(image_response.content).decode("utf-8")
+
+    return None
+
 
 def populate_editions():
     if Edition.objects.exists():
         return
-    
-    editions_to_insert = [Edition(**edition) for edition in editions]
+
+    editions_to_insert = []
+    for edition in editions:
+        edition_photo_base64 = fetch_random_image_base64()
+
+        if edition_photo_base64:
+            image_instance = Images.objects.create(photo_base64=edition_photo_base64)
+        else:
+            image_instance = None
+
+        new_edition = Edition(
+            year=edition["year"],
+            semester=edition["semester"],
+            photo_base64_edition=image_instance,
+            applications_accepted=edition["applications_accepted"],
+            registration_deadline=edition["registration_deadline"],
+            start_date=edition["start_date"],
+            finish_date=edition["finish_date"],
+            min_members=edition["min_members"],
+            max_members=edition["max_members"],
+        )
+
+        editions_to_insert.append(new_edition)
+
     avaliators = list(Avaliator.objects.all())
     criteria = list(Criterion.objects.all())
     all_categories = list(Category.objects.all())
@@ -19,12 +71,14 @@ def populate_editions():
         if index % 2 == 0:
             courses = list(Course.objects.filter(acronym__in=["MCC", "DCC"]))
             classes = list(ClassInfo.objects.filter(course__acronym__in=["MCC", "DCC"]))
-            categories = list(Category.objects.filter(id__lt=len(all_categories)//2))
+            categories = list(Category.objects.filter(id__lt=len(all_categories) // 2))
         else:
             courses = list(Course.objects.filter(acronym__in=["INFO", "BSI"]))
-            classes = list(ClassInfo.objects.filter(course__acronym__in=["INFO", "BSI"]))
-            categories = list(Category.objects.filter(id__gte=len(all_categories)//2))
-        
+            classes = list(
+                ClassInfo.objects.filter(course__acronym__in=(["INFO", "BSI"]))
+            )
+            categories = list(Category.objects.filter(id__gte=len(all_categories) // 2))
+
         edition.courses.set(courses)
         edition.avaliators.set(avaliators)
         edition.criteria.set(criteria)

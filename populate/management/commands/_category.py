@@ -1,5 +1,5 @@
 from hackathon.models import Category
-from hackathon.resources.data_team import categories
+from populate.resources.data_team import categories
 
 def populate_categories():
     if Category.objects.exists():

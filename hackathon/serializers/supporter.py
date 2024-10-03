@@ -5,7 +5,7 @@ from hackathon.models import Supporter
 class SupporterListSerializer(ModelSerializer):
     class Meta:
         model = Supporter
-        fields = ('id', 'company', 'logo', 'link', 'edition')
+        fields = ('id', 'company', 'logo', 'link')
         depth = 1
 
 class SupporterRetrieveSerializer(ModelSerializer):

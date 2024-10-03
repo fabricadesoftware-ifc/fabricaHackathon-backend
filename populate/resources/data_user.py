@@ -1,7 +1,7 @@
 avaliators = [
     {
         "name": "Avaliador 1",
-        "email": "vnhiansdt@gmail.com",
+        "email": "herobrineminecanal@gmail.com",
         "whatsapp": "999999999",
         "portfolio": "https://portfolio.com",
         "github": "https://github.com",
@@ -11,7 +11,7 @@ avaliators = [
     },
     {
         "name": "Avaliador 2",
-        "email": "vinijao123690@gmail.com",
+        "email": "avaliador2@example.com",
         "whatsapp": "999999999",
         "portfolio": "https://portfolio.com",
         "github": "https://github.com",
@@ -66,7 +66,7 @@ students = [
         "name": "Aluno 2",
         "registration": "2021000002",
         "whatsapp": "999999999",
-        "email": "vinijao123690@gmail.com",
+        "email": "aluno2@example.com",
         "github": "https://github.com",
         "portfolio": "https://portfolio.com",
         "linkedin": "https://linkedin.com",
@@ -318,12 +318,12 @@ students = [
 teachers = [
 {
     "name": "Teacher 1",
-    "email": "vnhiansdt@gmail.com",
+    "email": "vinijao123690@gmail.com",
     "password": "teacher123"
 },
 {
     "name": "Teacher 2",
-    "email": "vinijao123690@gmail.com",
+    "email": "teacher2@example.com",
     "password": "teacher456"
 },
 {

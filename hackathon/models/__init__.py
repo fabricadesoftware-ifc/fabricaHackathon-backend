@@ -2,7 +2,6 @@ from .criterion import Criterion
 from .edition import Edition
 from .course import Course
 from .class_info import ClassInfo
-from .avaliator import Avaliator
 from .team import Team
 from .avaliation import Avaliation
 from .student import Student

@@ -1,7 +1,7 @@
 import base64
 import requests
 from hackathon.models import Team, Student, Edition, Category, Images
-from hackathon.resources.data_team import teams
+from populate.resources.data_team import teams
 
 
 def fetch_random_image_base64():

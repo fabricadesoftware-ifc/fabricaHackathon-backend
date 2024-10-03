@@ -1,20 +1,20 @@
 from django.core.management.base import BaseCommand, CommandError, CommandParser
-from hackathon.management.commands._user import (
+from ._user import (
     populate_users,
     populate_students,
     populate_avaliators,
     populate_teachers,
 )
-from hackathon.management.commands._class import populate_courses, populate_classes
-from hackathon.management.commands._edition import populate_editions
-from hackathon.management.commands._avaliation import (
+from ._class import populate_courses, populate_classes
+from ._edition import populate_editions
+from ._avaliation import (
     populate_criteria,
     populate_avaliations,
 )
-from hackathon.management.commands._ranking import populate_rankings
-from hackathon.management.commands._team import populate_teams
-from hackathon.management.commands._category import populate_categories
-from hackathon.management.commands._supporter import populate_supporters
+from ._ranking import populate_rankings
+from ._team import populate_teams
+from ._category import populate_categories
+from ._supporter import populate_supporters
 
 
 class Command(BaseCommand):
@@ -158,11 +158,11 @@ class Command(BaseCommand):
 
         self.__handle_class()
         self.__handle_user()
-        self.__handle_avaliation()
         self.__handle_category()
         self.__handle_supporter()
         self.__handle_edition()
         self.__handle_team()
+        self.__handle_avaliation()
         self.__handle_ranking()
 
         self.stdout.write(self.style.SUCCESS("OK"))

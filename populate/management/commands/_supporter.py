@@ -1,5 +1,5 @@
 from hackathon.models import Supporter, Edition
-from hackathon.resources.data_supporter import supporters
+from populate.resources.data_supporter import supporters
 
 def populate_supporters():
     if Supporter.objects.exists():

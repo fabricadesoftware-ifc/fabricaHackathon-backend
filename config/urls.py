@@ -24,16 +24,16 @@ from drf_spectacular.views import (
     SpectacularSwaggerView,
 )
 from rest_framework_simplejwt.views import (
-    TokenObtainPairView,
     TokenRefreshView,
 )
+
+from user.views import CustomTokenObtainPairView, UserViewSet
 
 from hackathon.views import (
     StudentViewSet,
     AvailableStudentViewSet,
     SupporterViewSet,
     AvaliationViewSet,
-    AvaliatorViewSet,
     CriterionViewSet,
     ClassInfoViewSet,
     CourseViewSet,
@@ -53,7 +53,6 @@ router.register("courses", CourseViewSet)
 router.register("students", StudentViewSet)
 router.register("supporters", SupporterViewSet)
 router.register("avaliations", AvaliationViewSet)
-router.register("avaliators", AvaliatorViewSet)
 router.register("criteria", CriterionViewSet)
 router.register("editions", EditionViewSet)
 router.register("teams", TeamViewSet)
@@ -61,6 +60,7 @@ router.register("rankings", RankingViewSet)
 router.register("categories", CategoryViewSet)
 router.register("images", ImagesViewSet)
 router.register("available-students", AvailableStudentViewSet, basename="available-students")
+router.register("users", UserViewSet)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -76,7 +76,7 @@ urlpatterns = [
         SpectacularRedocView.as_view(url_name="schema"),
         name="redoc",
     ),
-    path("token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
+    path("token/", CustomTokenObtainPairView.as_view(), name="token_obtain_pair"),
     path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
     path("accept-team/<str:verification_token>/", approve_team, name="accept-team"),
     path("reject-work/<str:verification_token>/", reject_team, name="reject-team"),

@@ -1,5 +1,5 @@
 from hackathon.models import ClassInfo, Course
-from hackathon.resources.data_class import classes, courses
+from populate.resources.data_class import classes, courses
 
 
 def populate_courses():

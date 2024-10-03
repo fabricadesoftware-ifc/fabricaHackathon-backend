@@ -1,6 +1,8 @@
 import random
-from hackathon.models import Criterion, Avaliation, Team, Avaliator, Ranking, Edition
-from hackathon.resources.data_avaliation import criteria
+from hackathon.models import Criterion, Avaliation, Team
+from user.models import CustomUser
+from django.contrib.auth.models import Group
+from populate.resources.data_avaliation import criteria
 
 
 def populate_criteria():
@@ -17,7 +19,8 @@ def populate_avaliations():
 
     teams = list(Team.objects.all())
     criteria = list(Criterion.objects.all())
-    avaliators = list(Avaliator.objects.all())
+
+    avaliators = CustomUser.objects.filter(groups__name="Avaliators")
 
     avaliations_to_insert = []
 

@@ -18,6 +18,7 @@ dependencies = [
     "python-dotenv>=1.0.1",
     "django-filter>=24.3",
     "django-base64field>=1.0",
+    "requests>=2.32.3",
 ]
 requires-python = "==3.12.*"
 readme = "README.md"
@@ -35,6 +36,7 @@ populate = "python manage.py populate"
 loaddata = "python manage.py loaddata core.json"
 dumpdata = "python manage.py dumpdata --indent 2"
 celery = "celery -A config worker -l info"
+flush = "python manage.py flush"
 
 [tool.pdm]
 distribution = false

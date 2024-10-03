@@ -3,14 +3,15 @@ import requests
 from hackathon.models import (
     Course,
     Edition,
-    Avaliator,
     Criterion,
     ClassInfo,
     Category,
     Supporter,
     Images,
 )
-from hackathon.resources.data_edition import editions
+from user.models import CustomUser
+
+from populate.resources.data_edition import editions
 
 
 def fetch_random_image_base64():
@@ -58,7 +59,7 @@ def populate_editions():
 
         editions_to_insert.append(new_edition)
 
-    avaliators = list(Avaliator.objects.all())
+    avaliators = list(CustomUser.objects.filter(groups__name="Avaliator"))
     criteria = list(Criterion.objects.all())
     all_categories = list(Category.objects.all())
     supporters = list(Supporter.objects.all())

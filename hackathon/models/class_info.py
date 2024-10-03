@@ -3,6 +3,7 @@ from .course import Course
 
 class ClassInfo(models.Model):
     name = models.CharField(max_length=100)
+    year = models.IntegerField()
     course = models.ForeignKey(Course, on_delete=models.RESTRICT)
 
     def __str__(self):

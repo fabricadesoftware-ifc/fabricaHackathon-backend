@@ -17,11 +17,15 @@ class EditionListSerializer(ModelSerializer):
         fields = (
             "id",
             "year",
+            "semester",
             "photo_base64_edition",
             "photo_base64_code",
             "applications_accepted",
             "registration_deadline",
+            "courses",
+            "involved_classes",
         )
+        depth = 2
 
     def get_photo_base64_code(self, obj):
         image = obj.photo_base64_edition

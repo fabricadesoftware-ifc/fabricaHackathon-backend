@@ -2,11 +2,21 @@ from rest_framework.serializers import ModelSerializer
 from rest_framework import serializers
 from django.core.exceptions import ValidationError
 
-from hackathon.models import Edition, Images
+from hackathon.models import Edition, ClassInfo
 
 
 def min_members_is_greater_than_max_members(attrs):
     return attrs["max_members"] <= attrs["min_members"]
+
+
+def validate_involved_classes(self, value):
+    selected_courses = self.initial_data.get("courses")
+    valid_classes = ClassInfo.objects.filter(course__in=selected_courses)
+    invalid_classes = [cls for cls in value if cls not in valid_classes]
+
+    if invalid_classes:
+        raise ValidationError(f"Invalid classes: {invalid_classes}")
+    return value
 
 
 class EditionListSerializer(ModelSerializer):
@@ -69,4 +79,7 @@ class EditionWriteSerializer(ModelSerializer):
         if "max_members" in attrs or "min_members" in attrs:
             if min_members_is_greater_than_max_members(attrs):
                 raise ValidationError("Min members cannot exceed max members")
+        if "involved_classes" in attrs:
+            validate_involved_classes(self, attrs["involved_classes"])
+
         return super().validate(attrs)

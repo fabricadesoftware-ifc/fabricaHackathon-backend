@@ -28,7 +28,6 @@ class EditionListSerializer(ModelSerializer):
             "id",
             "year",
             "semester",
-            "photo_base64_edition",
             "photo_base64_code",
             "applications_accepted",
             "registration_deadline",

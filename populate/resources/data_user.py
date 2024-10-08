@@ -72,7 +72,6 @@ students = [
         "linkedin": "https://linkedin.com",
         "instagram": "https://instagram.com",
     },
-    #data below will have aluno<number>@example.com as email
     {
         "name": "Aluno 3",
         "registration": "2021000003",

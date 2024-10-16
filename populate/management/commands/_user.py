@@ -1,6 +1,6 @@
 from django.contrib.auth.models import Group
-from hackathon.models import Student, ClassInfo
-from user.models import CustomUser
+from hackathon.models import ClassInfo
+from user.models import CustomUser, StudentProfile
 from populate.resources.data_user import students, avaliators, teachers
 
 
@@ -21,59 +21,81 @@ def populate_users():
 
 
 def populate_students():
-    if Student.objects.exists():
+    if CustomUser.objects.filter(groups__name="Students").exists():
         return
 
-    students_to_insert = [Student(**student) for student in students]
+    students_group, created = Group.objects.get_or_create(name="Students")
     class_infos = list(ClassInfo.objects.all())
+
+    students_to_insert = [
+        CustomUser(name=student["name"], email=student["email"]) for student in students
+    ]
     students_per_class = max(1, len(students_to_insert) // len(class_infos))
 
-    for index, student in enumerate(students_to_insert):
+    for index, student in enumerate(students):
         class_index = index // students_per_class
 
         class_info = class_infos[class_index % len(class_infos)]
-        student.class_info = class_info
-    
-    Student.objects.bulk_create(students_to_insert)
+        student["student_profile"]["class_info"] = class_info
+
+    CustomUser.objects.bulk_create(students_to_insert)
+
+    for student in CustomUser.objects.filter(
+        email__in=[std["email"] for std in students]
+    ):
+        student.groups.add(students_group)
+        student.set_password(
+            next(s["password"] for s in students if s["email"] == student.email)
+        )
+        student.save()
+
+        student_profile_data = next(
+            s["student_profile"] for s in students if s["email"] == student.email
+        )
+
+        StudentProfile.objects.update_or_create(
+            user=student, defaults=student_profile_data
+        )
+
 
 def populate_avaliators():
-    # Check if any Avaliators exist
     if CustomUser.objects.filter(groups__name="Avaliators").exists():
         return
 
-    # Get or create the Avaliators group
     avaliators_group, created = Group.objects.get_or_create(name="Avaliators")
 
-    # Create Avaliators users
     avaliators_to_insert = [
         CustomUser(name=avaliator["name"], email=avaliator["email"], is_avaliator=True)
         for avaliator in avaliators
     ]
     CustomUser.objects.bulk_create(avaliators_to_insert)
 
-    # Add created users to the Avaliators group
-    for avaliator in CustomUser.objects.filter(email__in=[avl["email"] for avl in avaliators]):
+    for avaliator in CustomUser.objects.filter(
+        email__in=[avl["email"] for avl in avaliators]
+    ):
         avaliator.groups.add(avaliators_group)
-        avaliator.set_password(next(a["password"] for a in avaliators if a["email"] == avaliator.email))
+        avaliator.set_password(
+            next(a["password"] for a in avaliators if a["email"] == avaliator.email)
+        )
         avaliator.save()
 
+
 def populate_teachers():
-    # Check if any Teachers exist
     if CustomUser.objects.filter(groups__name="Teachers").exists():
         return
 
-    # Get or create the Teachers group
     teachers_group, created = Group.objects.get_or_create(name="Teachers")
 
-    # Create Teachers users
     teachers_to_insert = [
-        CustomUser(name=teacher["name"], email=teacher["email"])
-        for teacher in teachers
+        CustomUser(name=teacher["name"], email=teacher["email"]) for teacher in teachers
     ]
     CustomUser.objects.bulk_create(teachers_to_insert)
 
-    # Add created users to the Teachers group
-    for teacher in CustomUser.objects.filter(email__in=[tch["email"] for tch in teachers]):
+    for teacher in CustomUser.objects.filter(
+        email__in=[tch["email"] for tch in teachers]
+    ):
         teacher.groups.add(teachers_group)
-        teacher.set_password(next(t["password"] for t in teachers if t["email"] == teacher.email))
+        teacher.set_password(
+            next(t["password"] for t in teachers if t["email"] == teacher.email)
+        )
         teacher.save()

@@ -33,6 +33,7 @@ class EditionListSerializer(ModelSerializer):
             "registration_deadline",
             "courses",
             "involved_classes",
+            "categories",
         )
         depth = 2
 

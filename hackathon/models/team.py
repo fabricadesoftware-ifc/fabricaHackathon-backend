@@ -1,8 +1,7 @@
 from django.db import models
 
-from .student import Student
+from user.models import StudentProfile as Student
 from .edition import Edition
-from .category import Category
 from .images import Images
 
 class Team(models.Model):

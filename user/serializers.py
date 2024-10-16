@@ -1,6 +1,6 @@
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework.serializers import ModelSerializer
-from .models import CustomUser
+from .models import CustomUser, StudentProfile
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
@@ -23,3 +23,15 @@ class UserSerializer(ModelSerializer):
 
     def Create(self, validated_data):
         return CustomUser.objects.create_user(**validated_data)
+
+
+class UserDetailSerializer(ModelSerializer):
+    class Meta:
+        model = CustomUser
+        fields = "__all__"
+        depth = 1
+
+class StudentProfileSerializer(ModelSerializer):
+    class Meta:
+        model = StudentProfile
+        fields = "__all__"

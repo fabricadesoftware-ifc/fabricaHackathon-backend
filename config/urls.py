@@ -27,7 +27,7 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
 
-from user.views import CustomTokenObtainPairView, UserViewSet
+from user.views import CustomTokenObtainPairView, UserViewSet, StudentProfileViewSet
 
 from hackathon.views import (
     StudentViewSet,
@@ -61,6 +61,7 @@ router.register("categories", CategoryViewSet)
 router.register("images", ImagesViewSet)
 router.register("available-students", AvailableStudentViewSet, basename="available-students")
 router.register("users", UserViewSet)
+router.register("student-profiles", StudentProfileViewSet)
 
 urlpatterns = [
     path("admin/", admin.site.urls),

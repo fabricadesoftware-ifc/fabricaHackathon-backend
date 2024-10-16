@@ -1,6 +1,7 @@
 import base64
 import requests
-from hackathon.models import Team, Student, Edition, Category, Images
+from hackathon.models import Team, Edition, Images
+from user.models import StudentProfile
 from populate.resources.data_team import teams
 
 
@@ -27,6 +28,7 @@ def populate_teams():
         return
 
     teams_to_insert = []
+    
     for index, team_data in enumerate(teams):
         team_photo_base64 = fetch_random_image_base64()
 
@@ -54,7 +56,7 @@ def populate_teams():
             else:
                 team.edition = editions[index % len(editions)]
 
-            team.leader = Student.objects.filter(
+            team.leader = StudentProfile.objects.filter(
                 class_info__course__acronym__in=["MCC", "DCC"]
             ).first()
 
@@ -67,7 +69,7 @@ def populate_teams():
             else:
                 team.edition = editions[index % len(editions)]
 
-            team.leader = Student.objects.filter(
+            team.leader = StudentProfile.objects.filter(
                 class_info__course__acronym__in=["INFO", "BSI"]
             ).first()
 
@@ -86,9 +88,9 @@ def populate_teams():
     for index, team in enumerate(created_teams):
         if index % 2 == 0:
             team.students.set(
-                Student.objects.filter(class_info__course__acronym__in=["MCC", "DCC"])
+                StudentProfile.objects.filter(class_info__course__acronym__in=["MCC", "DCC"])
             )
         else:
             team.students.set(
-                Student.objects.filter(class_info__course__acronym__in=["INFO", "BSI"])
+                StudentProfile.objects.filter(class_info__course__acronym__in=["INFO", "BSI"])
             )

@@ -4,7 +4,6 @@ from .course import Course
 from .class_info import ClassInfo
 from .team import Team
 from .avaliation import Avaliation
-from .student import Student
 from .supporter import Supporter
 from .ranking import Ranking
 from .category import Category

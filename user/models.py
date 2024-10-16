@@ -45,4 +45,4 @@ class StudentProfile(models.Model):
         "hackathon.ClassInfo", on_delete=models.PROTECT, verbose_name="class", null=True, blank=True
     )
     def __str__(self):
-        return f"{self.user.name} - {self.student_id}"
+        return f"{self.user.name} - {self.user.id}"

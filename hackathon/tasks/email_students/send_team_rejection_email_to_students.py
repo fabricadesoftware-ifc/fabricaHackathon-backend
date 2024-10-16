@@ -8,7 +8,7 @@ import os
 def send_team_rejection_email_to_students(team_id):
     team = Team.objects.get(id=team_id)
     edition = Edition.objects.get(id=team.edition.id)
-    student_emails = list(team.students.all().values_list("email", flat=True))
+    student_emails = list(team.students.all().values_list("user__email", flat=True))
     subject = f"Sua inscrição foi recusada para o Hackathon-IFC {edition.year}!"
     message = f"A inscrição do seu time para o Hackathon-IFC {edition.year} foi recusada. Por favor refaça a inscrição pelo website."
 

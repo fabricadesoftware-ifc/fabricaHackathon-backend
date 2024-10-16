@@ -1,1 +1,1 @@
-from .student import StudentFilter
+from .team import TeamFilter

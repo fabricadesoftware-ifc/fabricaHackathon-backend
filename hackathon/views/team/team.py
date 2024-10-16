@@ -14,10 +14,12 @@ from hackathon.serializers.team import (
 )
 
 from hackathon.signals import new_team_request
+from hackathon.filters.team import TeamFilter
 
 
 class TeamViewSet(ModelViewSet):
     queryset = Team.objects.all()
+    filterset_class = TeamFilter
 
     def get_serializer_class(self):
         if self.action == "list":

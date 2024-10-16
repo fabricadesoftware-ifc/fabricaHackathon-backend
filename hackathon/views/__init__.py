@@ -1,4 +1,3 @@
-from .student.student import StudentViewSet
 from .student.available_student import AvailableStudentViewSet
 from .supporter import SupporterViewSet
 from .avaliation import AvaliationViewSet

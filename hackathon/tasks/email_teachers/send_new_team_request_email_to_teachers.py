@@ -1,7 +1,7 @@
 from celery import shared_task
 from django.core.mail import send_mail
-from django.contrib.auth.models import User, Group
-from hackathon.models import Student, Team, Edition
+from django.contrib.auth.models import Group
+from hackathon.models import Team
 
 
 @shared_task

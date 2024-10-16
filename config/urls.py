@@ -30,7 +30,6 @@ from rest_framework_simplejwt.views import (
 from user.views import CustomTokenObtainPairView, UserViewSet, StudentProfileViewSet
 
 from hackathon.views import (
-    StudentViewSet,
     AvailableStudentViewSet,
     SupporterViewSet,
     AvaliationViewSet,
@@ -50,7 +49,6 @@ router = DefaultRouter()
 
 router.register("classes", ClassInfoViewSet)
 router.register("courses", CourseViewSet)
-router.register("students", StudentViewSet)
 router.register("supporters", SupporterViewSet)
 router.register("avaliations", AvaliationViewSet)
 router.register("criteria", CriterionViewSet)

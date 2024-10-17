@@ -1,6 +1,5 @@
 import base64
 from uuid import uuid4
-from django.urls import reverse
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
@@ -13,7 +12,6 @@ from hackathon.serializers.team import (
     TeamUpdateSerializer,
 )
 
-from hackathon.signals import new_team_request
 from hackathon.filters.team import TeamFilter
 
 
@@ -30,23 +28,16 @@ class TeamViewSet(ModelViewSet):
             return TeamUpdateSerializer
         return TeamCreateSerializer
 
-    print('1')
-
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
         image_file = request.FILES.get("photo")
 
-        print('2')
-
         if image_file:
             image_base64 = base64.b64encode(image_file.read()).decode("utf-8")
 
             image_data = Images.objects.create(photo_base64=image_base64)
-            breakpoint()
-
-            print('3')
 
             team_data = Team.objects.create(
                 name=serializer.validated_data["name"],
@@ -61,9 +52,7 @@ class TeamViewSet(ModelViewSet):
                 verification_token=str(uuid4()),
                 photo_base64_team=image_data,
             )
-            print('4')
         else:
-            print('5')
             team_data = Team.objects.create(
                 name=serializer.validated_data["name"],
                 edition=serializer.validated_data["edition"],
@@ -76,14 +65,11 @@ class TeamViewSet(ModelViewSet):
                 category=serializer.validated_data["category"],
                 verification_token=str(uuid4()),
             )
-            print('5')
-
-        print('6')
+        
         students = serializer.validated_data["students"]
         team_data.students.set(students)
 
         output_serializer_edition = TeamListSerializer(team_data)
-        print('7')
         return Response(output_serializer_edition.data, status=status.HTTP_201_CREATED)
 
     http_method_names = ["get", "post", "patch", "delete"]

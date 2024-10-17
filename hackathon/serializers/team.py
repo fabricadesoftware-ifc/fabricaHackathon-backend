@@ -59,7 +59,7 @@ class TeamRetrieveSerializer(ModelSerializer):
 
 
 class TeamCreateSerializer(ModelSerializer):
-    photo = serializers.ImageField()
+    photo = serializers.ImageField(required=False)
 
     class Meta:
         model = Team

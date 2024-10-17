@@ -43,6 +43,6 @@ def send_new_team_request_email_to_teachers(
 def get_student_names_and_classes(students):
     students_and_classes = []
     for student in students:
-        students_and_classes.append(f"{student.name} ({student.class_info.name})")
+        students_and_classes.append(f"{student.user.name} ({student.class_info.name})")
 
     return students_and_classes

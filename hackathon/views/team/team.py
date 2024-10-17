@@ -30,17 +30,23 @@ class TeamViewSet(ModelViewSet):
             return TeamUpdateSerializer
         return TeamCreateSerializer
 
+    print('1')
+
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
         image_file = request.FILES.get("photo")
 
+        print('2')
+
         if image_file:
             image_base64 = base64.b64encode(image_file.read()).decode("utf-8")
 
             image_data = Images.objects.create(photo_base64=image_base64)
             breakpoint()
+
+            print('3')
 
             team_data = Team.objects.create(
                 name=serializer.validated_data["name"],
@@ -55,11 +61,29 @@ class TeamViewSet(ModelViewSet):
                 verification_token=str(uuid4()),
                 photo_base64_team=image_data,
             )
+            print('4')
+        else:
+            print('5')
+            team_data = Team.objects.create(
+                name=serializer.validated_data["name"],
+                edition=serializer.validated_data["edition"],
+                deploy_link=serializer.validated_data["deploy_link"],
+                repository_link=serializer.validated_data["repository_link"],
+                presentation_link=serializer.validated_data["presentation_link"],
+                video_link=serializer.validated_data["video_link"],
+                pitch_link=serializer.validated_data["pitch_link"],
+                leader=serializer.validated_data["leader"],
+                category=serializer.validated_data["category"],
+                verification_token=str(uuid4()),
+            )
+            print('5')
 
+        print('6')
         students = serializer.validated_data["students"]
         team_data.students.set(students)
 
         output_serializer_edition = TeamListSerializer(team_data)
+        print('7')
         return Response(output_serializer_edition.data, status=status.HTTP_201_CREATED)
 
     http_method_names = ["get", "post", "patch", "delete"]

@@ -37,6 +37,7 @@ loaddata = "python manage.py loaddata core.json"
 dumpdata = "python manage.py dumpdata --indent 2"
 celery = "celery -A config worker -l info"
 flush = "python manage.py flush"
+destroy = "rm -rf db.sqlite3"
 
 [tool.pdm]
 distribution = false

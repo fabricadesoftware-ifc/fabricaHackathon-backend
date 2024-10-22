@@ -28,7 +28,6 @@ def validate_team_name(attrs):
 
 
 class TeamListSerializer(ModelSerializer):
-    photo_base64_code = serializers.SerializerMethodField()
 
     class Meta:
         model = Team
@@ -36,27 +35,40 @@ class TeamListSerializer(ModelSerializer):
             "id",
             "name",
             "edition",
-            "photo_base64_team",
-            "photo_base64_code",
             "valid_registration",
             "category",
             "students",
             "leader",
         )
 
+
+
+class TeamRetrieveSerializer(ModelSerializer):
+    photo_base64_code = serializers.SerializerMethodField()
+    class Meta:
+        model = Team
+        fields = (
+            "id",
+            "name",
+            "students",
+            "edition",
+            "deploy_link",
+            "repository_link",
+            "presentation_link",
+            "video_link",
+            "pitch_link",
+            "leader",
+            "category",
+            "verification_token",
+            "photo_base64_code",
+        )
+        depth = 1
+
     def get_photo_base64_code(self, obj):
         image = obj.photo_base64_team
         if image:
             return image.photo_base64
         return None
-
-
-class TeamRetrieveSerializer(ModelSerializer):
-    class Meta:
-        model = Team
-        fields = "__all__"
-        depth = 1
-
 
 class TeamCreateSerializer(ModelSerializer):
     photo = serializers.ImageField(required=False)

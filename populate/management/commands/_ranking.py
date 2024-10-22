@@ -1,34 +1,25 @@
-from hackathon.models import Team, Ranking, Edition, Avaliation
-
+from hackathon.models import Ranking, Edition, Avaliation
+from hackathon.actions.rankings import recalculate_rankings, get_final_grade
 
 def populate_rankings():
     if Ranking.objects.exists():
         return
 
-    teams = list(Team.objects.all())
-    editions = list(Edition.objects.all())
+    avaliations = list(Avaliation.objects.all())
 
-    rankings_to_insert = []
+    rankings_to_create = []
+    
+    for avaliation in avaliations:
+            if avaliation.team not in [ranking.team for ranking in rankings_to_create]:
+                ranking = Ranking(
+                    team=avaliation.team,
+                    final_grade=get_final_grade(Avaliation.objects.filter(team=avaliation.team)),
+                    classification=1,
+                    edition=avaliation.team.edition
+                )
+                rankings_to_create.append(ranking)
+        
+    Ranking.objects.bulk_create(rankings_to_create)
 
-    for team in teams:
-        if len(Avaliation.objects.filter(team=team)) != 0:
-            final_grade = sum(
-                [avaliation.grade for avaliation in Avaliation.objects.filter(team=team)]
-            ) / len(Avaliation.objects.filter(team=team))
-
-            ranking = Ranking(
-                team=team, final_grade=final_grade, classification=1, edition=team.edition
-            )
-            rankings_to_insert.append(ranking)
-
-    for edition in editions:
-        edition_rankings = filter(
-            lambda ranking: ranking.edition == edition, rankings_to_insert
-        )
-
-        for index, ranking in enumerate(edition_rankings):
-            for other_ranking in edition_rankings:
-                if ranking.final_grade < other_ranking.final_grade:
-                    ranking.classification += 1
-
-    Ranking.objects.bulk_create(rankings_to_insert)
+    for edition in Edition.objects.all():
+        recalculate_rankings(Ranking.objects.filter(edition=edition))

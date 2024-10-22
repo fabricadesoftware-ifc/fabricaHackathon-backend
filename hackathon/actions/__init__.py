@@ -1,0 +1,1 @@
+from hackathon.actions.rankings import update_rankings

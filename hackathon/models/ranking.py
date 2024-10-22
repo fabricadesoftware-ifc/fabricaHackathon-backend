@@ -5,7 +5,7 @@ from .edition import Edition
 
 class Ranking(models.Model):
     team = models.ForeignKey(Team, on_delete=models.RESTRICT)
-    final_grade = models.DecimalField(max_digits=3, decimal_places=1)
+    final_grade = models.DecimalField(max_digits=4, decimal_places=2)
     classification = models.IntegerField()
     edition = models.ForeignKey(Edition, on_delete=models.RESTRICT)
 

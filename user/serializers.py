@@ -2,14 +2,32 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework.serializers import ModelSerializer
 from .models import CustomUser, StudentProfile
 
+def get_user_type(user):
+    teacher_group = user.groups.filter(name="Teachers").exists()
+    student_group = user.groups.filter(name="Students").exists()
+    avaliator_group = user.groups.filter(name="Avaliators").exists()
+    if teacher_group:
+        return "teacher"
+    elif student_group:
+        return "student"
+    elif avaliator_group:
+        return "avaliator"
+
+def get_student_profile_id(user):
+    if user.has_student_profile():
+        return user.student_profile.id
+    else:
+        return None
+
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
     def get_token(cls, user):
         token = super().get_token(user)
 
-        # Add custom claims
         token['name'] = user.name
-        # Add any other fields you want in the token
+        token['email'] = user.email
+        token['user_type'] = get_user_type(user)
+        token['student_profile_id'] = get_student_profile_id(user)
         return token
 
 class UserSerializer(ModelSerializer):

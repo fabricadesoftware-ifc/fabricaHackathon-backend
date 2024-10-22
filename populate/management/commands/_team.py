@@ -31,9 +31,11 @@ def populate_teams():
     
     for index, team_data in enumerate(teams):
         team_photo_base64 = fetch_random_image_base64()
+        images_to_insert = []
 
         if team_photo_base64:
-            image_instance = Images.objects.create(photo_base64=team_photo_base64)
+            image_instance = Images(photo_base64=team_photo_base64)
+            images_to_insert.append(image_instance)
         else:
             image_instance = None
 
@@ -49,6 +51,8 @@ def populate_teams():
             photo_base64_team=image_instance,
         )
 
+        Images.objects.bulk_create(images_to_insert)
+        
         if index % 2 == 0:
             editions = list(Edition.objects.filter(courses__acronym__in=["MCC", "DCC"]))
             if index < len(editions):
@@ -84,13 +88,11 @@ def populate_teams():
     Team.objects.bulk_create(teams_to_insert)
 
     created_teams = list(Team.objects.all())
+    student_group_one = StudentProfile.objects.filter(class_info__course__acronym__in=["MCC", "DCC"])
+    student_group_two = StudentProfile.objects.filter(class_info__course__acronym__in=["INFO", "BSI"])
 
     for index, team in enumerate(created_teams):
         if index % 2 == 0:
-            team.students.set(
-                StudentProfile.objects.filter(class_info__course__acronym__in=["MCC", "DCC"])
-            )
+            team.students.set(student_group_one)
         else:
-            team.students.set(
-                StudentProfile.objects.filter(class_info__course__acronym__in=["INFO", "BSI"])
-            )
+            team.students.set(student_group_two)

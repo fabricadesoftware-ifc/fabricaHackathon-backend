@@ -32,7 +32,7 @@ def populate_avaliations():
                         team=team,
                         criterion=criterion,
                         avaliator=avaliator,
-                        grade=random.randint(0, 10),
+                        grade=round(random.uniform(0, 10), 2)
                     )
                 )
 

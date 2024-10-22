@@ -13,7 +13,7 @@ class Avaliation(models.Model):
     )
     team = models.ForeignKey(Team, on_delete=models.RESTRICT)
     criterion = models.ForeignKey(Criterion, on_delete=models.RESTRICT)
-    grade = models.DecimalField(max_digits=3, decimal_places=1)
+    grade = models.DecimalField(max_digits=4, decimal_places=2)
 
     def __str__(self):
         return f"{self.avaliator.name} - {self.team.name} - {self.criterion.description} - {self.grade}"

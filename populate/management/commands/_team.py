@@ -4,6 +4,9 @@ from hackathon.models import Team, Edition, Images
 from user.models import StudentProfile
 from populate.resources.data_team import teams
 
+from faker import Faker
+
+fake = Faker("pt_BR")
 
 def fetch_random_image_base64():
     url = "https://random.imagecdn.app/v1/image?width=1280&height=720&category=dogs&format=json"
@@ -48,6 +51,7 @@ def populate_teams():
             pitch_link=team_data["pitch_link"],
             registration_date=team_data["registration_date"],
             valid_registration=team_data["valid_registration"],
+            project_name=fake.country(),
             photo_base64_team=image_instance,
         )
 

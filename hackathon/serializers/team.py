@@ -39,6 +39,7 @@ class TeamListSerializer(ModelSerializer):
             "category",
             "students",
             "leader",
+            "project_name"
         )
 
 
@@ -61,6 +62,7 @@ class TeamRetrieveSerializer(ModelSerializer):
             "category",
             "verification_token",
             "photo_base64_code",
+            "project_name"
         )
         depth = 1
 
@@ -87,6 +89,7 @@ class TeamCreateSerializer(ModelSerializer):
             "leader",
             "category",
             "verification_token",
+            "project_name",
             "photo",
         )
 

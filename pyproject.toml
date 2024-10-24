@@ -19,6 +19,7 @@ dependencies = [
     "django-filter>=24.3",
     "django-base64field>=1.0",
     "requests>=2.32.3",
+    "faker>=30.8.1",
 ]
 requires-python = "==3.12.*"
 readme = "README.md"

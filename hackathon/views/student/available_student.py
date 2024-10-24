@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 from user.models import StudentProfile as Student
 from hackathon.models import Edition, Team
-from user.serializers import StudentProfileSerializer
+from user.serializers import StudentProfileListSerializer
 from user.filters import StudentProfileFilter
 
 def get_available_students(edition):

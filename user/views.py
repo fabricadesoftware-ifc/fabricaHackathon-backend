@@ -2,7 +2,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from .serializers import CustomTokenObtainPairSerializer
 from rest_framework.viewsets import ModelViewSet
 from .models import CustomUser, StudentProfile
-from .serializers import UserSerializer, UserDetailSerializer, StudentProfileSerializer
+from .serializers import UserSerializer, UserDetailSerializer, StudentProfileCreateSerializer, StudentProfileDetailSerializer, StudentProfileListSerializer
 from .filters import UserFilter
 
 class CustomTokenObtainPairView(TokenObtainPairView):
@@ -19,4 +19,11 @@ class UserViewSet(ModelViewSet):
 
 class StudentProfileViewSet(ModelViewSet):
     queryset = StudentProfile.objects.all()
-    serializer_class = StudentProfileSerializer
+    
+    def get_serializer_class(self):
+        if self.action == 'retrieve':
+            return StudentProfileDetailSerializer
+        elif self.action == 'list':
+            return StudentProfileListSerializer
+        else:
+            return StudentProfileCreateSerializer

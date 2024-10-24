@@ -8,6 +8,7 @@ class Team(models.Model):
     name = models.CharField(max_length=100)
     students = models.ManyToManyField(Student, related_name='students')
     edition = models.ForeignKey(Edition, on_delete=models.RESTRICT)
+    project_name = models.CharField(max_length=100, null=True, blank=True)
     deploy_link = models.URLField(null=True, blank=True)
     repository_link = models.URLField(null=True, blank=True)
     presentation_link = models.URLField(null=True, blank=True)

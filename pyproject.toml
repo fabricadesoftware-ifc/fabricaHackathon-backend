@@ -3,7 +3,7 @@ name = "fabrica-hackathon"
 version = "0.1.0"
 description = "Default template for PDM package"
 authors = [
-    {name = "fabricaDeSoftware", email = ""},
+    {name = "fabricaDeSoftware", email = "a@a.com"},
 ]
 dependencies = [
     "django>=5.0.4",

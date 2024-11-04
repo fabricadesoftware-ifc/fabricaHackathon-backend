@@ -52,7 +52,7 @@ class EditionRetrieveSerializer(ModelSerializer):
 
 
 class EditionWriteSerializer(ModelSerializer):
-    photo = serializers.ImageField()
+    photo_base64_edition = serializers.ImageField(write_only=True, required=False)
 
     class Meta:
         model = Edition
@@ -72,7 +72,7 @@ class EditionWriteSerializer(ModelSerializer):
             "criteria",
             "categories",
             "supporters",
-            "photo",
+            "photo_base64_edition",
         )
 
     def validate(self, attrs):

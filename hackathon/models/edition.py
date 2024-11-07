@@ -12,7 +12,7 @@ class Edition(models.Model):
     semester = models.IntegerField()
     courses = models.ManyToManyField(Course)
     involved_classes = models.ManyToManyField(ClassInfo)
-    photo_base64_edition = models.OneToOneField(Images, on_delete=models.CASCADE, null=True, blank=True)
+    photo_base64_edition = models.ForeignKey(Images, on_delete=models.CASCADE, null=True, blank=True)
     applications_accepted = models.BooleanField(default=True, null=True, blank=True)
     registration_deadline = models.DateField(null=True, blank=True)
     start_date = models.DateField(null=True, blank=True)

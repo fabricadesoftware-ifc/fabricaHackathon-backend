@@ -1,6 +1,7 @@
 from rest_framework.serializers import ModelSerializer
 
-from hackathon.models import Avaliation
+from hackathon.models import Avaliation, Ranking
+from hackathon.actions.rankings import recalculate_rankings
 
 class AvaliationSerializer(ModelSerializer):
     class Meta:

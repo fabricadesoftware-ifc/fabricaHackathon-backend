@@ -42,28 +42,20 @@ class TeamViewSet(ModelViewSet):
             team_data = Team.objects.create(
                 name=serializer.validated_data["name"],
                 edition=serializer.validated_data["edition"],
-                deploy_link=serializer.validated_data["deploy_link"],
-                repository_link=serializer.validated_data["repository_link"],
-                presentation_link=serializer.validated_data["presentation_link"],
-                video_link=serializer.validated_data["video_link"],
-                pitch_link=serializer.validated_data["pitch_link"],
                 leader=serializer.validated_data["leader"],
-                category=serializer.validated_data["category"],
                 verification_token=str(uuid4()),
                 photo_base64_team=image_data,
+                project=serializer.validated_data["project"],
+                valid_registration=serializer.validated_data["valid_registration"],
             )
         else:
             team_data = Team.objects.create(
                 name=serializer.validated_data["name"],
                 edition=serializer.validated_data["edition"],
-                deploy_link=serializer.validated_data["deploy_link"],
-                repository_link=serializer.validated_data["repository_link"],
-                presentation_link=serializer.validated_data["presentation_link"],
-                video_link=serializer.validated_data["video_link"],
-                pitch_link=serializer.validated_data["pitch_link"],
                 leader=serializer.validated_data["leader"],
-                category=serializer.validated_data["category"],
                 verification_token=str(uuid4()),
+                project=serializer.validated_data["project"],
+                valid_registration=serializer.validated_data["valid_registration"],
             )
         
         students = serializer.validated_data["students"]

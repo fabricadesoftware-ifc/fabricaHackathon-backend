@@ -11,3 +11,4 @@ from .ranking import RankingViewSet
 from .class_info import ClassInfoViewSet
 from .category import CategoryViewSet
 from .images import ImagesViewSet
+from .project import ProjectViewSet

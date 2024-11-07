@@ -8,3 +8,4 @@ from .supporter import Supporter
 from .ranking import Ranking
 from .category import Category
 from .images import Images
+from .project import Project

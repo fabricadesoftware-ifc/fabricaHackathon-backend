@@ -34,6 +34,7 @@ class EditionListSerializer(ModelSerializer):
             "courses",
             "involved_classes",
             "categories",
+            "criteria",
         )
         depth = 2
 
@@ -45,10 +46,12 @@ class EditionListSerializer(ModelSerializer):
 
 
 class EditionRetrieveSerializer(ModelSerializer):
+    photo_base64 = serializers.SerializerMethodField()
+
     class Meta:
         model = Edition
         fields = "__all__"
-        depth = 1
+        depth = 2
 
 
 class EditionWriteSerializer(ModelSerializer):

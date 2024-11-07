@@ -13,42 +13,23 @@ from user.models import CustomUser
 
 from populate.resources.data_edition import editions
 
-
-def fetch_random_image_base64():
-    url = "https://random.imagecdn.app/v1/image?width=1280&height=720&category=dogs&format=json"
-
-    response = requests.get(url)
-    if response.status_code == 200:
-        data = response.json()
-
-        image_url = data.get("url")
-
-        if image_url:
-            image_response = requests.get(image_url)
-
-            if image_response.status_code == 200:
-                return base64.b64encode(image_response.content).decode("utf-8")
-
-    return None
-
-
 def populate_editions():
     if Edition.objects.exists():
         return
 
     editions_to_insert = []
+    if Images.objects.exists():
+        edition_photo_base64 = Images.objects.first()
+    else:
+        response = requests.get("https://picsum.photos/200")
+        edition_photo_base64 = base64.b64encode(response.content).decode("utf-8")
+        edition_photo_base64 = Images.objects.create(photo_base64=edition_photo_base64)
+
     for edition in editions:
-        edition_photo_base64 = fetch_random_image_base64()
-
-        if edition_photo_base64:
-            image_instance = Images.objects.create(photo_base64=edition_photo_base64)
-        else:
-            image_instance = None
-
         new_edition = Edition(
             year=edition["year"],
             semester=edition["semester"],
-            photo_base64_edition=image_instance,
+            photo_base64_edition=edition_photo_base64,
             applications_accepted=edition["applications_accepted"],
             registration_deadline=edition["registration_deadline"],
             start_date=edition["start_date"],

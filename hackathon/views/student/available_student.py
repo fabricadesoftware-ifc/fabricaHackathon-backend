@@ -26,5 +26,5 @@ class AvailableStudentViewSet(ViewSet):
 
         filtered_students = self.filterset_class(request.GET, queryset=available_students).qs
 
-        serializer = StudentProfileSerializer(filtered_students, many=True)
+        serializer = StudentProfileListSerializer(filtered_students, many=True)
         return Response(serializer.data)

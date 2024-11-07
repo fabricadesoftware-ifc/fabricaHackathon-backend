@@ -43,6 +43,7 @@ from hackathon.views import (
     ImagesViewSet,
     approve_team,
     reject_team,
+    ProjectViewSet,
 )
 
 router = DefaultRouter()
@@ -60,6 +61,7 @@ router.register("images", ImagesViewSet)
 router.register("available-students", AvailableStudentViewSet, basename="available-students")
 router.register("users", UserViewSet)
 router.register("student-profiles", StudentProfileViewSet)
+router.register("projects", ProjectViewSet)
 
 urlpatterns = [
     path("admin/", admin.site.urls),

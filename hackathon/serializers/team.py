@@ -36,10 +36,10 @@ class TeamListSerializer(ModelSerializer):
             "name",
             "edition",
             "valid_registration",
-            "category",
             "students",
             "leader",
-            "project_name"
+            "registration_date",
+            "project"
         )
 
 
@@ -53,16 +53,12 @@ class TeamRetrieveSerializer(ModelSerializer):
             "name",
             "students",
             "edition",
-            "deploy_link",
-            "repository_link",
-            "presentation_link",
-            "video_link",
-            "pitch_link",
             "leader",
-            "category",
             "verification_token",
             "photo_base64_code",
-            "project_name"
+            "valid_registration",
+            "registration_date",
+            "project"
         )
         depth = 1
 
@@ -81,15 +77,7 @@ class TeamCreateSerializer(ModelSerializer):
             "name",
             "students",
             "edition",
-            "deploy_link",
-            "repository_link",
-            "presentation_link",
-            "video_link",
-            "pitch_link",
-            "leader",
-            "category",
             "verification_token",
-            "project_name",
             "photo",
         )
 

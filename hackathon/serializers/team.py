@@ -60,7 +60,7 @@ class TeamRetrieveSerializer(ModelSerializer):
             "registration_date",
             "project"
         )
-        depth = 1
+        depth = 2
 
     def get_photo_base64_code(self, obj):
         image = obj.photo_base64_team

@@ -11,7 +11,8 @@ from hackathon.serializers import (
 )
 from hackathon.signals import applications_accepted_changed
 from rest_framework.decorators import action
-from django.db.models import Q
+import base64
+from datetime import datetime
 
 
 class EditionViewSet(ModelViewSet):
@@ -81,10 +82,31 @@ class EditionViewSet(ModelViewSet):
 
         return Response(serializer.data)
 
-    @action(detail=False, methods=["get"], url_path="avaliator/(?P<evaluator_id>[^/.]+)")
+    @action(
+        detail=False, methods=["get"], url_path="avaliator/(?P<evaluator_id>[^/.]+)"
+    )
     def evaluator(self, request, evaluator_id=None):
         try:
             editions = self.queryset.filter(avaliators__id=evaluator_id)
+            serializer = EditionListSerializer(editions, many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response(
+                {"error": f"An error occurred: {str(e)}"},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+    @action(
+        detail=False,
+        methods=["get"],
+        url_path="avaliator/(?P<evaluator_id>[^/.]+)/active",
+    )
+    def evaluator_active(self, request, evaluator_id=None):
+        try:
+            editions = self.queryset.filter(
+                avaliators__id=evaluator_id,
+                finish_date__gte=datetime.now().date(),
+            )
             serializer = EditionListSerializer(editions, many=True)
             return Response(serializer.data, status=status.HTTP_200_OK)
         except Exception as e:

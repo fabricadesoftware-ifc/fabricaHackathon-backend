@@ -8,7 +8,6 @@ from ._user import (
 from ._class import populate_courses, populate_classes
 from ._edition import populate_editions
 from ._avaliation import (
-    populate_criteria,
     populate_avaliations,
 )
 from ._ranking import populate_rankings
@@ -17,6 +16,8 @@ from ._category import populate_categories
 from ._supporter import populate_supporters
 from ._project import populate_projects
 from ._image import populate_images
+from ._criteria import populate_criteria
+
 
 class Command(BaseCommand):
     def add_arguments(self, parser: CommandParser) -> None:
@@ -178,6 +179,11 @@ class Command(BaseCommand):
         populate_images()
         self.stdout.write(self.style.SUCCESS("OK"))
 
+    def __handle_criteria(self) -> None:
+        self.stdout.write("Populating Criteria...", ending=" ")
+        populate_criteria()
+        self.stdout.write(self.style.SUCCESS("OK"))
+
     def __handle_all(self) -> None:
         self.stdout.write("Populating Everything...", ending=" ")
 
@@ -186,6 +192,7 @@ class Command(BaseCommand):
         self.__handle_user()
         self.__handle_category()
         self.__handle_supporter()
+        self.__handle_criteria()
         self.__handle_edition()
         self.__handle_project()
         self.__handle_team()

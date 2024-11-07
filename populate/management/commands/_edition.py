@@ -40,7 +40,7 @@ def populate_editions():
 
         editions_to_insert.append(new_edition)
 
-    avaliators = list(CustomUser.objects.filter(groups__name="Avaliator"))
+    avaliators = list(CustomUser.objects.filter(groups__name="Avaliators"))
     criteria = list(Criterion.objects.all())
     all_categories = list(Category.objects.all())
     supporters = list(Supporter.objects.all())

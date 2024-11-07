@@ -35,6 +35,7 @@ class EditionListSerializer(ModelSerializer):
             "involved_classes",
             "categories",
             "criteria",
+            "avaliators",
         )
         depth = 2
 
@@ -46,12 +47,18 @@ class EditionListSerializer(ModelSerializer):
 
 
 class EditionRetrieveSerializer(ModelSerializer):
-    photo_base64 = serializers.SerializerMethodField()
+    photo_base64_code = serializers.SerializerMethodField()
 
     class Meta:
         model = Edition
         fields = "__all__"
         depth = 2
+
+    def get_photo_base64_code(self, obj):
+        image = obj.photo_base64_edition
+        if image:
+            return image.photo_base64
+        return None
 
 
 class EditionWriteSerializer(ModelSerializer):

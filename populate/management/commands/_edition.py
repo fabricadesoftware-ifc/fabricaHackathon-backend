@@ -10,7 +10,6 @@ from hackathon.models import (
     Images,
 )
 from user.models import CustomUser
-
 from populate.resources.data_edition import editions
 
 def populate_editions():
@@ -18,6 +17,7 @@ def populate_editions():
         return
 
     editions_to_insert = []
+    
     if Images.objects.exists():
         edition_photo_base64 = Images.objects.first()
     else:
@@ -37,15 +37,15 @@ def populate_editions():
             min_members=edition["min_members"],
             max_members=edition["max_members"],
         )
-
         editions_to_insert.append(new_edition)
+
+    for new_edition in editions_to_insert:
+        new_edition.save()
 
     avaliators = list(CustomUser.objects.filter(groups__name="Avaliators"))
     criteria = list(Criterion.objects.all())
     all_categories = list(Category.objects.all())
     supporters = list(Supporter.objects.all())
-
-    Edition.objects.bulk_create(editions_to_insert)
 
     created_editions = list(Edition.objects.all())
 
@@ -56,9 +56,7 @@ def populate_editions():
             categories = list(Category.objects.filter(id__lt=len(all_categories) // 2))
         else:
             courses = list(Course.objects.filter(acronym__in=["INFO", "BSI"]))
-            classes = list(
-                ClassInfo.objects.filter(course__acronym__in=(["INFO", "BSI"]))
-            )
+            classes = list(ClassInfo.objects.filter(course__acronym__in=["INFO", "BSI"]))
             categories = list(Category.objects.filter(id__gte=len(all_categories) // 2))
 
         edition.courses.set(courses)

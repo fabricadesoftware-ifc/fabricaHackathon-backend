@@ -1,5 +1,6 @@
 from django.db import models
 from .images import Images
+from .team import Team
 
 class Project(models.Model):
     name = models.CharField(max_length=100, null=True, blank=True)
@@ -10,3 +11,4 @@ class Project(models.Model):
     pitch_link = models.URLField(null=True, blank=True)
     category = models.ForeignKey('Category', on_delete=models.RESTRICT, null=True, blank=True)
     project_photo_base64 = models.OneToOneField(Images, on_delete=models.CASCADE, null=True, blank=True)
+    team_id = models.OneToOneField(Team, on_delete=models.CASCADE, null=True, blank=True)

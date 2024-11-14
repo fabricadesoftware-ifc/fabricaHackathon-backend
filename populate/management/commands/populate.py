@@ -194,8 +194,8 @@ class Command(BaseCommand):
         self.__handle_supporter()
         self.__handle_criteria()
         self.__handle_edition()
-        self.__handle_project()
         self.__handle_team()
+        self.__handle_project()
         self.__handle_avaliation()
         self.__handle_ranking()
 

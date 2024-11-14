@@ -3,7 +3,7 @@ from django.db import models
 from user.models import StudentProfile as Student
 from .edition import Edition
 from .images import Images
-from .project import Project
+# from .project import Project
 
 class Team(models.Model):
     name = models.CharField(max_length=100)
@@ -14,7 +14,7 @@ class Team(models.Model):
     valid_registration = models.BooleanField(default=False, null=True, blank=True)
     registration_date = models.DateField(auto_now_add=True, null=True, blank=True)
     photo_base64_team= models.ForeignKey(Images, on_delete=models.CASCADE, null=True, blank=True)
-    project = models.ForeignKey(Project, on_delete=models.RESTRICT, null=True, blank=True)
+    # project = models.ForeignKey(Project, on_delete=models.RESTRICT, null=True, blank=True)
 
     def __str__(self):
         return self.name

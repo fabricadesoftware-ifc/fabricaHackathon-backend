@@ -5,7 +5,7 @@ from hackathon.models import Project
 class ProjectListSerializer(ModelSerializer):
     class Meta:
         model = Project
-        fields = ('id', 'name', 'category')
+        fields = ('id', 'name', 'category', "team_id")
 
 class ProjectDetailSerializer(ModelSerializer):
     class Meta:

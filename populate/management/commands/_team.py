@@ -13,7 +13,6 @@ def populate_teams():
         return
 
     teams_to_insert = []
-    projects = Project.objects.all()
     photo_base64_team = Images.objects.first()
 
     for index, team_data in enumerate(teams):
@@ -67,7 +66,6 @@ def populate_teams():
     )
 
     for index, team in enumerate(created_teams):
-        team.project = projects[index]
         team.save()
         if index % 2 == 0:
             team.students.set(student_group_one)

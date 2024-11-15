@@ -53,6 +53,7 @@ class StudentProfileListSerializer(ModelSerializer):
     class Meta:
         model = StudentProfile
         fields = "__all__"
+        depth = 1
 
 class StudentProfileDetailSerializer(ModelSerializer):
     class Meta:

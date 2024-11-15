@@ -1,5 +1,5 @@
 from django.db.models import Q
-from hackathon.models import Team, Edition, Images, Project
+from hackathon.models import Team, Edition, Images
 from user.models import StudentProfile
 from populate.resources.data_team import teams
 

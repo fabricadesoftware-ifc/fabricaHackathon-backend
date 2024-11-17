@@ -10,5 +10,5 @@ class Project(models.Model):
     video_link = models.URLField(null=True, blank=True)
     pitch_link = models.URLField(null=True, blank=True)
     category = models.ForeignKey('Category', on_delete=models.RESTRICT, null=True, blank=True)
-    project_photo_base64 = models.OneToOneField(Images, on_delete=models.CASCADE, null=True, blank=True)
+    project_photo_base64 = models.ForeignKey(Images, on_delete=models.CASCADE, null=True, blank=True)
     team_id = models.OneToOneField(Team, on_delete=models.CASCADE, null=True, blank=True)

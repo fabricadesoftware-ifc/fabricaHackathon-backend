@@ -14,16 +14,20 @@ fake = faker.Faker("pt_BR")
 #     category = models.ForeignKey('Category', on_delete=models.RESTRICT, null=True, blank=True)
 #     project_photo_base64 = models.OneToOneField(Images, on_delete=models.CASCADE, null=True, blank=True)
 
+
 def generate_projects(teams_count):
     projects = []
     for _ in range(teams_count):
-        projects.append({
-            "name": fake.word(),
-            "deploy_link": fake.url(),
-            "repository_link": fake.url(),
-            "presentation_link": fake.url(),
-            "video_link": fake.url(),
-            "pitch_link": fake.url(),
-            "project_photo_base64": None
-        })
+        projects.append(
+            {
+                "name": fake.word(),
+                "deploy_link": fake.url(),
+                "repository_link": fake.url(),
+                "presentation_link": fake.url(),
+                "video_link": fake.url(),
+                "pitch_link": fake.url(),
+                "project_photo_base64": None,
+                "description": fake.text(),
+            }
+        )
     return projects

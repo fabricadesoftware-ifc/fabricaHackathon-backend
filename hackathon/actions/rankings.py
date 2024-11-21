@@ -1,19 +1,29 @@
 from hackathon.models import Avaliation, Ranking
 
+
 def update_rankings(avaliation_id):
     avaliation_instance = Avaliation.objects.get(id=avaliation_id)
 
     ranking = Ranking.objects.get(team=avaliation_instance.team)
     all_edition_rankings = Ranking.objects.filter(edition=ranking.edition)
-    
+
     if all_edition_rankings.exists():
         recalculate_rankings(all_edition_rankings)
 
+
 def get_final_grade(all_team_avaliations):
-    return sum([avaliation.grade for avaliation in all_team_avaliations]) / len(all_team_avaliations)
+    return sum(
+        [
+            (avaliation.grade * avaliation.criterion.weight)
+            for avaliation in all_team_avaliations
+        ]
+    ) / len(all_team_avaliations)
+
 
 def recalculate_rankings(all_edition_rankings):
-    sorted_ranking_grades = sorted([ranking.final_grade for ranking in all_edition_rankings], reverse=True)
+    sorted_ranking_grades = sorted(
+        [ranking.final_grade for ranking in all_edition_rankings], reverse=True
+    )
     used_ranks = []
 
     index = 1

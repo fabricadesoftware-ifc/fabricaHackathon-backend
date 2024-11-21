@@ -2,6 +2,7 @@ from django.db import models
 from .images import Images
 from .team import Team
 
+
 class Project(models.Model):
     name = models.CharField(max_length=100, null=True, blank=True)
     deploy_link = models.URLField(null=True, blank=True)
@@ -9,6 +10,13 @@ class Project(models.Model):
     presentation_link = models.URLField(null=True, blank=True)
     video_link = models.URLField(null=True, blank=True)
     pitch_link = models.URLField(null=True, blank=True)
-    category = models.ForeignKey('Category', on_delete=models.RESTRICT, null=True, blank=True)
-    project_photo_base64 = models.ForeignKey(Images, on_delete=models.CASCADE, null=True, blank=True)
-    team_id = models.OneToOneField(Team, on_delete=models.CASCADE, null=True, blank=True)
+    category = models.ForeignKey(
+        "Category", on_delete=models.RESTRICT, null=True, blank=True
+    )
+    project_photo_base64 = models.ForeignKey(
+        Images, on_delete=models.CASCADE, null=True, blank=True
+    )
+    team_id = models.OneToOneField(
+        Team, on_delete=models.CASCADE, null=True, blank=True
+    )
+    description = models.TextField(null=True, blank=True)

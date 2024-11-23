@@ -22,6 +22,7 @@ class ProjectDetailSerializer(ModelSerializer):
         fields = '__all__'
 
 class ProjectCreateSerializer(ModelSerializer):
+    photo_file = serializers.ImageField(write_only=True, required=False)
     class Meta:
         model = Project
         fields = '__all__'

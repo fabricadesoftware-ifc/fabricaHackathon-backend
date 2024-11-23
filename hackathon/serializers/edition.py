@@ -31,6 +31,8 @@ class EditionListSerializer(ModelSerializer):
             "photo_base64_code",
             "applications_accepted",
             "registration_deadline",
+            "start_date",
+            "finish_date",
             "courses",
             "involved_classes",
             "categories",

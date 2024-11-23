@@ -39,13 +39,14 @@ class TeamListSerializer(ModelSerializer):
             "students",
             "leader",
             "registration_date",
-            "project"
+            "project",
         )
-
+        depth = 1
 
 
 class TeamRetrieveSerializer(ModelSerializer):
     photo_base64_code = serializers.SerializerMethodField()
+
     class Meta:
         model = Team
         fields = (
@@ -58,7 +59,7 @@ class TeamRetrieveSerializer(ModelSerializer):
             "photo_base64_code",
             "valid_registration",
             "registration_date",
-            "project"
+            "project",
         )
         depth = 2
 
@@ -67,6 +68,7 @@ class TeamRetrieveSerializer(ModelSerializer):
         if image:
             return image.photo_base64
         return None
+
 
 class TeamCreateSerializer(ModelSerializer):
     photo = serializers.ImageField(required=False)

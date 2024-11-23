@@ -27,13 +27,16 @@ def validate_team_name(attrs):
             raise ValidationError(f"Team name already exists.")
 
 
-class TeamListSerializer(ModelSerializer):
+class TeamListSerializer(serializers.ModelSerializer):
+    photo_base64_code = serializers.SerializerMethodField()
+    project = serializers.SerializerMethodField()
 
     class Meta:
         model = Team
         fields = (
             "id",
             "name",
+            "photo_base64_code",
             "edition",
             "valid_registration",
             "students",
@@ -43,6 +46,29 @@ class TeamListSerializer(ModelSerializer):
         )
         depth = 1
 
+    def get_photo_base64_code(self, obj):
+        if obj.photo_base64_team and hasattr(obj.photo_base64_team, "photo_base64"):
+            return obj.photo_base64_team.photo_base64
+        return None
+
+    def get_project(self, obj):
+        project = obj.project
+        if project:
+            return {
+                "id": project.id,
+                "name": project.name,
+                "category": project.category.id if project.category else None,
+                "description": project.description,
+                "deploy_link": project.deploy_link,
+                "repository_link": project.repository_link,
+                "presentation_link": project.presentation_link,
+                "pitch_link": project.pitch_link,
+                "video_link": project.video_link,
+                "project_photo_base64_code": project.project_photo_base64.photo_base64
+                if project.project_photo_base64 and hasattr(project.project_photo_base64, "photo_base64")
+                else None,
+            }
+        return None
 
 class TeamRetrieveSerializer(ModelSerializer):
     photo_base64_code = serializers.SerializerMethodField()

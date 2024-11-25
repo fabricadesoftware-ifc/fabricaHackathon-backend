@@ -20,6 +20,7 @@ class ProjectDetailSerializer(ModelSerializer):
     class Meta:
         model = Project
         fields = '__all__'
+        depth = 1
 
 class ProjectCreateSerializer(ModelSerializer):
     photo_file = serializers.ImageField(write_only=True, required=False)

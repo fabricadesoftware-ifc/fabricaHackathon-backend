@@ -157,7 +157,7 @@ SIMPLE_JWT = {
 CELERY_TIMEZONE = "America/Sao_Paulo"
 CELERY_TASK_TRACK_STARTED = True
 CELERY_TASK_TIME_LIMIT = 30 * 60
-CELERY_BROKER_URL = "amqp://localhost"
+CELERY_BROKER_URL = "amqp://hiansdt:123690@localhost/fabricahackathon"
 CELERY_RESULT_BACKEND = "rpc://"
 
 EMAIL_BACKEND = os.getenv("EMAIL_BACKEND")

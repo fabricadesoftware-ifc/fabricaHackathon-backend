@@ -120,6 +120,7 @@ class TeamCreateSerializer(serializers.ModelSerializer):
             "name",
             "students",
             "edition",
+            "leader",
             "verification_token",
             "photo",
         )

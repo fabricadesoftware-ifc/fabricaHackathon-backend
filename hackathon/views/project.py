@@ -8,9 +8,11 @@ from hackathon.serializers import (
     ProjectDetailSerializer,
     ProjectCreateSerializer
 )
+from hackathon.filters import ProjectFilter
 
 class ProjectViewSet(ModelViewSet):
     queryset = Project.objects.all()
+    filterset_class = ProjectFilter
 
     def get_serializer_class(self):
         if self.action == "list":
@@ -30,7 +32,7 @@ class ProjectViewSet(ModelViewSet):
         category_id = request.data.get("category")
         team_id = request.data.get("team_id")
         description = request.data.get("description")
-        
+
         image_file = request.FILES.get("photo_file")
         if image_file:
             image_base64 = base64.b64encode(image_file.read()).decode("utf-8")
@@ -42,7 +44,7 @@ class ProjectViewSet(ModelViewSet):
 
         category = Category.objects.get(id=category_id) if category_id else None
         team = Team.objects.get(id=team_id) if team_id else None
-        
+
         project_data = Project.objects.create(
             name=name,
             deploy_link=deploy_link,
@@ -52,7 +54,7 @@ class ProjectViewSet(ModelViewSet):
             pitch_link=pitch_link,
             category=category,
             project_photo_base64=image_data,
-            team_id=team,  
+            team_id=team,
             description=description,
         )
 

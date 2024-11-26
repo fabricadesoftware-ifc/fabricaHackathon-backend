@@ -45,20 +45,19 @@ class TeamViewSet(ModelViewSet):
                 leader=serializer.validated_data["leader"],
                 verification_token=str(uuid4()),
                 photo_base64_team=image_data,
-                project=serializer.validated_data["project"],
-                valid_registration=serializer.validated_data["valid_registration"],
             )
+            team_data.students.set(serializer.validated_data["students"])
         else:
             team_data = Team.objects.create(
                 name=serializer.validated_data["name"],
                 edition=serializer.validated_data["edition"],
                 leader=serializer.validated_data["leader"],
                 verification_token=str(uuid4()),
-                project=serializer.validated_data["project"],
-                valid_registration=serializer.validated_data["valid_registration"],
             )
-        
+            team_data.students.set(serializer.validated_data["students"])
+
         students = serializer.validated_data["students"]
+        print(students)
         team_data.students.set(students)
 
         output_serializer_edition = TeamListSerializer(team_data)

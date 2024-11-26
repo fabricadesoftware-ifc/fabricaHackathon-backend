@@ -1,9 +1,8 @@
 from django_filters.rest_framework import FilterSet, CharFilter
 
-from hackathon.models import Project
+from hackathon.models import ClassInfo
 
-class ProjectFilter(FilterSet):
-  edition_id = CharFilter(field_name='team_id__edition__id', lookup_expr='exact')
+class ClassInfoFilter(FilterSet):
   student_id = CharFilter(field_name='team_id__students__id', lookup_expr='exact')
 
   class Meta:

@@ -4,11 +4,13 @@ from ..permissions import IsAuthenticatedOrReadOnly
 
 from hackathon.models import Avaliation
 from hackathon.serializers import AvaliationSerializer, AvaliationDetailSerializer
+from hackathon.filters import EvaluationFilter
 
 
 @permission_classes([IsAuthenticatedOrReadOnly])
 class AvaliationViewSet(ModelViewSet):
     queryset = Avaliation.objects.all()
+    filterset_class = EvaluationFilter
 
     def get_serializer_class(self):
         if self.action == "retrieve":

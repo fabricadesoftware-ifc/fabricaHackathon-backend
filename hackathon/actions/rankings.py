@@ -17,7 +17,7 @@ def get_final_grade(all_team_avaliations):
             (avaliation.grade * avaliation.criterion.weight)
             for avaliation in all_team_avaliations
         ]
-    ) / len(all_team_avaliations)
+    ) / sum([avaliation.criterion.weight for avaliation in all_team_avaliations])
 
 
 def recalculate_rankings(all_edition_rankings):

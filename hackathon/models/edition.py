@@ -6,23 +6,34 @@ from .category import Category
 from .supporter import Supporter
 from .images import Images
 from user.models import CustomUser
+from uploader.models import Image
+
 
 class Edition(models.Model):
     year = models.IntegerField()
     semester = models.IntegerField()
     courses = models.ManyToManyField(Course)
     involved_classes = models.ManyToManyField(ClassInfo)
-    photo_base64_edition = models.ForeignKey(Images, on_delete=models.CASCADE, null=True, blank=True)
+    photo = models.ForeignKey(
+        Image,
+        related_name="+",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        default=None,
+    )
     applications_accepted = models.BooleanField(default=True, null=True, blank=True)
     registration_deadline = models.DateField(null=True, blank=True)
     start_date = models.DateField(null=True, blank=True)
     finish_date = models.DateField(null=True, blank=True)
     min_members = models.IntegerField(null=True, blank=True)
     max_members = models.IntegerField(null=True, blank=True)
-    avaliators = models.ManyToManyField(CustomUser, limit_choices_to={"is_avaliator": True})
+    avaliators = models.ManyToManyField(
+        CustomUser, limit_choices_to={"is_avaliator": True}
+    )
     criteria = models.ManyToManyField(Criterion)
-    categories = models.ManyToManyField(Category)
-    supporters = models.ManyToManyField(Supporter)
+    categories = models.ManyToManyField(Category, null=True, blank=True)
+    supporters = models.ManyToManyField(Supporter, null=True, blank=True)
 
     def __str__(self):
         return f"{self.year}.{self.semester}"

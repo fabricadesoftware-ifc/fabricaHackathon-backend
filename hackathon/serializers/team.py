@@ -1,6 +1,9 @@
 from rest_framework import serializers
 from hackathon.models import Team
 from rest_framework.validators import ValidationError
+from uploader.models import Image
+from uploader.serializers import ImageSerializer
+
 
 def validate_team_members(attrs):
     existing_team_members = []
@@ -15,6 +18,7 @@ def validate_team_members(attrs):
             f"Students already in a team for this edition: {', '.join(existing_team_members)}"
         )
 
+
 def validate_team_name(attrs):
     teams = Team.objects.filter(edition=attrs["edition"])
 
@@ -22,17 +26,18 @@ def validate_team_name(attrs):
         if team.name == attrs["name"]:
             raise ValidationError(f"Team name already exists.")
 
+
 # Serializer para listar os times
 class TeamListSerializer(serializers.ModelSerializer):
-    photo_base64_code = serializers.SerializerMethodField()
     project = serializers.SerializerMethodField()
+    photo = ImageSerializer(required=False, read_only=True)
 
     class Meta:
         model = Team
         fields = (
             "id",
             "name",
-            "photo_base64_code",
+            "photo",
             "edition",
             "valid_registration",
             "students",
@@ -42,13 +47,8 @@ class TeamListSerializer(serializers.ModelSerializer):
         )
         depth = 1
 
-    def get_photo_base64_code(self, obj):
-        if obj.photo_base64_team and hasattr(obj.photo_base64_team, "photo_base64"):
-            return obj.photo_base64_team.photo_base64
-        return None
-
     def get_project(self, obj):
-        if hasattr(obj, 'project') and obj.project:
+        if hasattr(obj, "project") and obj.project:
             project = obj.project
             return {
                 "id": project.id,
@@ -60,15 +60,14 @@ class TeamListSerializer(serializers.ModelSerializer):
                 "presentation_link": project.presentation_link,
                 "pitch_link": project.pitch_link,
                 "video_link": project.video_link,
-                "project_photo_base64_code": project.project_photo_base64.photo_base64
-                if project.project_photo_base64 and hasattr(project.project_photo_base64, "photo_base64")
-                else None,
+                "photo": project.photo,
             }
         return None
 
+
 class TeamRetrieveSerializer(serializers.ModelSerializer):
-    photo_base64_code = serializers.SerializerMethodField()
     project = serializers.SerializerMethodField()
+    photo = ImageSerializer(required=False, read_only=True)
 
     class Meta:
         model = Team
@@ -79,21 +78,15 @@ class TeamRetrieveSerializer(serializers.ModelSerializer):
             "edition",
             "leader",
             "verification_token",
-            "photo_base64_code",
+            "photo",
             "valid_registration",
             "registration_date",
             "project",
         )
         depth = 2
 
-    def get_photo_base64_code(self, obj):
-        image = obj.photo_base64_team
-        if image:
-            return image.photo_base64
-        return None
-
     def get_project(self, obj):
-        if hasattr(obj, 'project') and obj.project:
+        if hasattr(obj, "project") and obj.project:
             project = obj.project
             return {
                 "id": project.id,
@@ -105,14 +98,18 @@ class TeamRetrieveSerializer(serializers.ModelSerializer):
                 "presentation_link": project.presentation_link,
                 "pitch_link": project.pitch_link,
                 "video_link": project.video_link,
-                "project_photo_base64_code": project.project_photo_base64.photo_base64
-                if project.project_photo_base64 and hasattr(project.project_photo_base64, "photo_base64")
-                else None,
+                "photo": project.photo,
             }
         return None
 
+
 class TeamCreateSerializer(serializers.ModelSerializer):
-    photo = serializers.ImageField(required=False)
+    photo = serializers.SlugRelatedField(
+        queryset=Image.objects.all(),
+        slug_field="attachment_key",
+        required=False,
+        write_only=True,
+    )
 
     class Meta:
         model = Team
@@ -130,7 +127,16 @@ class TeamCreateSerializer(serializers.ModelSerializer):
         validate_team_name(attrs)
         return attrs
 
+
 class TeamUpdateSerializer(serializers.ModelSerializer):
+    photo = serializers.SlugRelatedField(
+        source="photo",
+        queryset=Image.objects.all(),
+        slug_field="attachment_key",
+        required=False,
+        write_only=True,
+    )
+
     class Meta:
         model = Team
         fields = "__all__"

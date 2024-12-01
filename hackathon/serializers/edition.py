@@ -1,8 +1,9 @@
-from rest_framework.serializers import ModelSerializer
-from rest_framework import serializers
+from rest_framework.serializers import ModelSerializer, SlugRelatedField
 from django.core.exceptions import ValidationError
+from uploader.serializers import ImageSerializer
 
 from hackathon.models import Edition, ClassInfo
+from uploader.models import Image
 
 
 def min_members_is_greater_than_max_members(attrs):
@@ -20,7 +21,7 @@ def validate_involved_classes(self, value):
 
 
 class EditionListSerializer(ModelSerializer):
-    photo_base64_code = serializers.SerializerMethodField()
+    photo = ImageSerializer(required=False, read_only=True)
 
     class Meta:
         model = Edition
@@ -28,7 +29,6 @@ class EditionListSerializer(ModelSerializer):
             "id",
             "year",
             "semester",
-            "photo_base64_code",
             "applications_accepted",
             "registration_deadline",
             "start_date",
@@ -38,33 +38,27 @@ class EditionListSerializer(ModelSerializer):
             "categories",
             "criteria",
             "avaliators",
+            "photo",
         )
         depth = 2
 
-    def get_photo_base64_code(self, obj):
-        image = obj.photo_base64_edition
-        if image:
-            return image.photo_base64
-        return None
-
 
 class EditionRetrieveSerializer(ModelSerializer):
-    photo_base64_code = serializers.SerializerMethodField()
+    capa = ImageSerializer(required=False, read_only=True)
 
     class Meta:
         model = Edition
         fields = "__all__"
         depth = 2
 
-    def get_photo_base64_code(self, obj):
-        image = obj.photo_base64_edition
-        if image:
-            return image.photo_base64
-        return None
-
 
 class EditionWriteSerializer(ModelSerializer):
-    photo_base64_edition = serializers.ImageField(write_only=True, required=False)
+    photo = SlugRelatedField(
+        queryset=Image.objects.all(),
+        slug_field="attachment_key",
+        required=False,
+        write_only=True,
+    )
 
     class Meta:
         model = Edition
@@ -84,8 +78,9 @@ class EditionWriteSerializer(ModelSerializer):
             "criteria",
             "categories",
             "supporters",
-            "photo_base64_edition",
+            "photo",
         )
+        read_only_fields = ("id",)
 
     def validate(self, attrs):
         if "max_members" in attrs or "min_members" in attrs:

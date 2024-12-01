@@ -1,29 +1,35 @@
-from rest_framework.serializers import ModelSerializer
-from rest_framework import serializers
+from rest_framework.serializers import ModelSerializer, SlugRelatedField
 from hackathon.models import Project
+from uploader.serializers import ImageSerializer
+from uploader.models import Image
+
 
 class ProjectListSerializer(ModelSerializer):
-    photo_base64_code = serializers.SerializerMethodField()
+    photo = ImageSerializer(required=False, read_only=True)
 
     class Meta:
         model = Project
         fields = "__all__"
         depth = 0
 
-    def get_photo_base64_code(self, obj):
-        image = obj.project_photo_base64
-        if image:
-            return image.photo_base64
-        return None
 
 class ProjectDetailSerializer(ModelSerializer):
+    photo = ImageSerializer(required=False, read_only=True)
+
     class Meta:
         model = Project
-        fields = '__all__'
+        fields = "__all__"
         depth = 1
 
+
 class ProjectCreateSerializer(ModelSerializer):
-    photo_file = serializers.ImageField(write_only=True, required=False)
+    photo = SlugRelatedField(
+        queryset=Image.objects.all(),
+        slug_field="attachment_key",
+        required=False,
+        write_only=True,
+    )
+
     class Meta:
         model = Project
-        fields = '__all__'
+        fields = "__all__"

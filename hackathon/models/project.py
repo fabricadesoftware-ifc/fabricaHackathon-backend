@@ -1,6 +1,6 @@
 from django.db import models
-from .images import Images
 from .team import Team
+from uploader.models import Image
 
 
 class Project(models.Model):
@@ -13,8 +13,13 @@ class Project(models.Model):
     category = models.ForeignKey(
         "Category", on_delete=models.RESTRICT, null=True, blank=True
     )
-    project_photo_base64 = models.ForeignKey(
-        Images, on_delete=models.CASCADE, null=True, blank=True
+    photo = models.ForeignKey(
+        Image,
+        related_name="+",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        default=None,
     )
     team_id = models.OneToOneField(
         Team, on_delete=models.CASCADE, null=True, blank=True

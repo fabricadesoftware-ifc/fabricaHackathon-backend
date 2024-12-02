@@ -1,4 +1,3 @@
-import base64
 import requests
 from hackathon.models import (
     Course,
@@ -7,35 +6,56 @@ from hackathon.models import (
     ClassInfo,
     Category,
     Supporter,
-    Images,
 )
+from django.core.files.base import ContentFile
+from uploader.models import Image as UploadedImage
 from user.models import CustomUser
 from populate.resources.data_edition import editions
+from io import BytesIO
+from PIL import Image as PILImage
+import mimetypes
+from django.core.files.base import ContentFile
+
 
 def populate_editions():
     if Edition.objects.exists():
         return
 
     editions_to_insert = []
-    
-    if Images.objects.exists():
-        edition_photo_base64 = Images.objects.first()
-    else:
-        response = requests.get("https://picsum.photos/200")
-        edition_photo_base64 = base64.b64encode(response.content).decode("utf-8")
-        edition_photo_base64 = Images.objects.create(photo_base64=edition_photo_base64)
 
+    response = requests.get("https://picsum.photos/800")
+
+    if response.status_code == 200:
+        image_data = BytesIO(response.content)
+        pil_image = PILImage.open(image_data)
+
+        image_buffer = BytesIO()
+        pil_image.save(image_buffer, format="JPEG")
+        image_buffer.seek(0)
+
+        content_type, _ = mimetypes.guess_type("sample_image.jpg")
+        if content_type is None:
+            content_type = "image/jpeg"
+
+        image_file = ContentFile(image_buffer.read(), name="sample_image.jpg")
+
+        image = UploadedImage(
+            file=image_file,
+            description="Sample image for edition",
+            content_type=content_type,
+        )
+        image.save()
     for edition in editions:
         new_edition = Edition(
             year=edition["year"],
             semester=edition["semester"],
-            photo_base64_edition=edition_photo_base64,
             applications_accepted=edition["applications_accepted"],
             registration_deadline=edition["registration_deadline"],
             start_date=edition["start_date"],
             finish_date=edition["finish_date"],
             min_members=edition["min_members"],
             max_members=edition["max_members"],
+            photo=image,
         )
         editions_to_insert.append(new_edition)
 
@@ -56,9 +76,10 @@ def populate_editions():
             categories = list(Category.objects.filter(id__lt=len(all_categories) // 2))
         else:
             courses = list(Course.objects.filter(acronym__in=["INFO", "BSI"]))
-            classes = list(ClassInfo.objects.filter(course__acronym__in=["INFO", "BSI"]))
+            classes = list(
+                ClassInfo.objects.filter(course__acronym__in=["INFO", "BSI"])
+            )
             categories = list(Category.objects.filter(id__gte=len(all_categories) // 2))
-
         edition.courses.set(courses)
         edition.avaliators.set(avaliators)
         edition.criteria.set(criteria)

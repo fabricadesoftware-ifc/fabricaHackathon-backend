@@ -26,7 +26,6 @@ from hackathon.views import (
     TeamViewSet,
     RankingViewSet,
     CategoryViewSet,
-    ImagesViewSet,
     approve_team,
     reject_team,
     ProjectViewSet,
@@ -43,7 +42,6 @@ router.register("editions", EditionViewSet)
 router.register("teams", TeamViewSet)
 router.register("rankings", RankingViewSet)
 router.register("categories", CategoryViewSet)
-router.register("images", ImagesViewSet)
 router.register(
     "available-students", AvailableStudentViewSet, basename="available-students"
 )

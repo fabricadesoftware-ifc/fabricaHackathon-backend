@@ -4,7 +4,6 @@ from .criterion import Criterion
 from .class_info import ClassInfo
 from .category import Category
 from .supporter import Supporter
-from .images import Images
 from user.models import CustomUser
 from uploader.models import Image
 
@@ -32,8 +31,8 @@ class Edition(models.Model):
         CustomUser, limit_choices_to={"is_avaliator": True}
     )
     criteria = models.ManyToManyField(Criterion)
-    categories = models.ManyToManyField(Category, null=True, blank=True)
-    supporters = models.ManyToManyField(Supporter, null=True, blank=True)
+    categories = models.ManyToManyField(Category)
+    supporters = models.ManyToManyField(Supporter)
 
     def __str__(self):
         return f"{self.year}.{self.semester}"

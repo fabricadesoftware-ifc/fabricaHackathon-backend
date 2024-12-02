@@ -130,7 +130,6 @@ class TeamCreateSerializer(serializers.ModelSerializer):
 
 class TeamUpdateSerializer(serializers.ModelSerializer):
     photo = serializers.SlugRelatedField(
-        source="photo",
         queryset=Image.objects.all(),
         slug_field="attachment_key",
         required=False,

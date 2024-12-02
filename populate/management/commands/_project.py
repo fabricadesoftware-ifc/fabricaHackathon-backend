@@ -1,8 +1,13 @@
-import base64
 import requests
-from hackathon.models import Project, Images, Category, Team
+from hackathon.models import Project, Category, Team
 from populate.resources.data_project import generate_projects
 from populate.resources.data_team import teams
+from uploader.models import Image as UploadedImage
+from io import BytesIO
+from PIL import Image as PILImage
+import mimetypes
+from django.core.files.base import ContentFile
+
 
 def populate_projects():
     if Project.objects.exists():
@@ -16,8 +21,29 @@ def populate_projects():
 
     for index, project_data in enumerate(projects):
         response = requests.get("https://picsum.photos/800")
-        image_base64 = base64.b64encode(response.content).decode("utf-8")
-        project_image = Images.objects.create(photo_base64=image_base64, description=f"Image for project {index + 1}")
+
+        if response.status_code == 200:
+            image_data = BytesIO(response.content)
+            pil_image = PILImage.open(image_data)
+
+            image_buffer = BytesIO()
+            pil_image.save(image_buffer, format="JPEG")
+            image_buffer.seek(0)
+
+            content_type, _ = mimetypes.guess_type("sample_image.jpg")
+            if content_type is None:
+                content_type = "image/jpeg"
+
+            image_file = ContentFile(image_buffer.read(), name="sample_image.jpg")
+
+            image = UploadedImage(
+                file=image_file,
+                description="Sample image for edition",
+                content_type=content_type,
+            )
+            image.save()
+        else:
+            image = None
 
         project_instance = Project(
             name=project_data["name"],
@@ -28,9 +54,9 @@ def populate_projects():
             pitch_link=project_data["pitch_link"],
             category=categories[index % len(categories)],
             team_id=team_instances[index % len(team_instances)],
-            project_photo_base64=project_image,  
+            description=project_data["description"],
+            photo=image,
         )
         project_instances.append(project_instance)
 
     Project.objects.bulk_create(project_instances)
-

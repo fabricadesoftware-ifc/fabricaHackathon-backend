@@ -15,7 +15,6 @@ from ._team import populate_teams
 from ._category import populate_categories
 from ._supporter import populate_supporters
 from ._project import populate_projects
-from ._image import populate_images
 from ._criteria import populate_criteria
 
 
@@ -67,11 +66,6 @@ class Command(BaseCommand):
             help="Inserts project data in the database for testing (Projects)",
         )
         parser.add_argument(
-            "--image",
-            action="store_true",
-            help="Inserts image data in the database for testing (Images)",
-        )
-        parser.add_argument(
             "--all",
             action="store_true",
             help="Inserts all data in the database for testing",
@@ -97,8 +91,6 @@ class Command(BaseCommand):
                 self.__handle_category()
             if options.get("project"):
                 self.__handle_project()
-            if options.get("image"):
-                self.__handle_image()
             if options.get("all"):
                 self.__handle_all()
 
@@ -174,11 +166,6 @@ class Command(BaseCommand):
         populate_projects()
         self.stdout.write(self.style.SUCCESS("OK"))
 
-    def __handle_image(self) -> None:
-        self.stdout.write("Populating Images...", ending=" ")
-        populate_images()
-        self.stdout.write(self.style.SUCCESS("OK"))
-
     def __handle_criteria(self) -> None:
         self.stdout.write("Populating Criteria...", ending=" ")
         populate_criteria()
@@ -187,7 +174,6 @@ class Command(BaseCommand):
     def __handle_all(self) -> None:
         self.stdout.write("Populating Everything...", ending=" ")
 
-        self.__handle_image()
         self.__handle_class()
         self.__handle_user()
         self.__handle_category()

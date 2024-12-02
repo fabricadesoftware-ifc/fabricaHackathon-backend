@@ -5,10 +5,15 @@ from django.db import models
 
 
 def image_file_path(image, _) -> str:
-    extension: str = mimetypes.guess_extension(image.file.file.content_type)
+    extension = None
+    if hasattr(image.file.file, "content_type"):
+        extension = mimetypes.guess_extension(image.file.file.content_type)
+    elif image.content_type:
+        extension = mimetypes.guess_extension(image.content_type)
     if extension == ".jpe":
         extension = ".jpg"
-    return f"images/{image.public_id}{extension or ''}"
+    extension = extension or ".jpg"
+    return f"images/{image.public_id}{extension}"
 
 
 class Image(models.Model):
@@ -16,7 +21,10 @@ class Image(models.Model):
         max_length=255,
         default=uuid.uuid4,
         unique=True,
-        help_text=("Used to attach the image to another object. " "Cannot be used to retrieve the image file."),
+        help_text=(
+            "Used to attach the image to another object. "
+            "Cannot be used to retrieve the image file."
+        ),
     )
     public_id = models.UUIDField(
         max_length=255,
@@ -27,9 +35,10 @@ class Image(models.Model):
             "Should not be readable until the image is attached to another object."
         ),
     )
-    file = models.ImageField(upload_to=image_file_path)
+    file = models.ImageField(upload_to=image_file_path, blank=True)
     description = models.CharField(max_length=255, blank=True)
     uploaded_on = models.DateTimeField(auto_now_add=True)
+    content_type = models.CharField(max_length=50, blank=True, null=True)  # New field
 
     def __str__(self) -> str:
         return f"{self.description} - {self.attachment_key}"

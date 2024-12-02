@@ -60,7 +60,7 @@ class TeamListSerializer(serializers.ModelSerializer):
                 "presentation_link": project.presentation_link,
                 "pitch_link": project.pitch_link,
                 "video_link": project.video_link,
-                "photo": project.photo,
+                "photo": {"url": project.photo.url},
             }
         return None
 
@@ -98,7 +98,7 @@ class TeamRetrieveSerializer(serializers.ModelSerializer):
                 "presentation_link": project.presentation_link,
                 "pitch_link": project.pitch_link,
                 "video_link": project.video_link,
-                "photo": project.photo,
+                "photo": {"url": project.photo.url},
             }
         return None
 

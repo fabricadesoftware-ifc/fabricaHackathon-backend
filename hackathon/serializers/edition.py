@@ -44,7 +44,7 @@ class EditionListSerializer(ModelSerializer):
 
 
 class EditionRetrieveSerializer(ModelSerializer):
-    capa = ImageSerializer(required=False, read_only=True)
+    photo = ImageSerializer(required=False, read_only=True)
 
     class Meta:
         model = Edition

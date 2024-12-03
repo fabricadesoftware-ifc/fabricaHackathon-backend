@@ -1,10 +1,26 @@
-from __future__ import absolute_import, unicode_literals
 import os
 from celery import Celery
+from dotenv import load_dotenv
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings')
+load_dotenv()
+BROKER_URL = os.getenv("BROKER_URL", "amqp://hiansdt:123690@localhost/fabricahackathon")
 
-app = Celery('config')
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings")
 
-app.config_from_object('django.conf:settings', namespace='CELERY')
-app.autodiscover_tasks()
+app = Celery("django_project", broker=BROKER_URL)
+
+app.conf.update(
+    broker_connection_retry_on_startup=True,
+)
+app.conf.task_always_eager = False
+app.config_from_object("django.conf:settings", namespace="CELERY")
+app.autodiscover_tasks(
+    [
+        "hackathon.tasks",
+    ]
+)
+
+
+@app.task(bind=True, ignore_result=True)
+def debug_task(self):
+    print(f"Request: {self.request!r}")

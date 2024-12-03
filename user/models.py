@@ -10,6 +10,12 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     is_avaliator = models.BooleanField(default=False)
+    password_reset_token = models.CharField(
+        _("Password Reset Token"), max_length=255, blank=True, null=True
+    )
+    password_reset_token_created = models.DateTimeField(
+        _("Password Reset Token Created"), blank=True, null=True
+    )
 
     objects = CustomUserManager()
 
@@ -42,7 +48,12 @@ class StudentProfile(models.Model):
     instagram = models.URLField(null=True, blank=True)
     registration = models.CharField(max_length=10)
     class_info = models.ForeignKey(
-        "hackathon.ClassInfo", on_delete=models.PROTECT, verbose_name="class", null=True, blank=True
+        "hackathon.ClassInfo",
+        on_delete=models.PROTECT,
+        verbose_name="class",
+        null=True,
+        blank=True,
     )
+
     def __str__(self):
         return f"{self.user.name} - (id: {self.id} - user: {self.user.id})"

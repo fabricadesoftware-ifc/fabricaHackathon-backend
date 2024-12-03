@@ -14,6 +14,7 @@ from rest_framework_simplejwt.views import (
 )
 
 from user.views import CustomTokenObtainPairView, UserViewSet, StudentProfileViewSet
+from hackathon.views.auth import forget_password, reset_password, validate_token
 
 from hackathon.views import (
     AvailableStudentViewSet,
@@ -68,6 +69,9 @@ urlpatterns = [
     path("accept-team/<str:verification_token>/", approve_team, name="accept-team"),
     path("reject-work/<str:verification_token>/", reject_team, name="reject-team"),
     path("api/media/", include(uploader_router.urls)),
+    path("api/forget-password/", forget_password, name="forget_password"),
+    path("api/reset-password/", reset_password, name="reset_password"),
+    path("api/validate-token/", validate_token, name="validate_token"),
 ]
 
 urlpatterns += static(settings.MEDIA_ENDPOINT, document_root=settings.MEDIA_ROOT)

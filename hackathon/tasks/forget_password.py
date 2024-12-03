@@ -9,7 +9,6 @@ from django.utils.html import strip_tags
 def send_forget_password_email(email, token):
     from_email = EMAIL_HOST_USER
 
-    # Renderizando o template HTML
     with open(
         os.path.join(BASE_DIR, "templates/send_forget_password_email_template.html"),
         "r",

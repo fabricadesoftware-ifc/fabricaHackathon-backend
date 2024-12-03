@@ -31,8 +31,6 @@ def forget_password(request):
         user.password_reset_token_created = pytz.utc.localize(datetime.datetime.now())
         user.save()
 
-        print(user.password_reset_token)
-
         send_forget_password_email.delay(email, token)
 
         return Response(
